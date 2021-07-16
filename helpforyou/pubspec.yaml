@@ -90,6 +90,4 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
-    - lib/assets/borda2.png
-    - lib/assets/h_sembranco.png
-    - lib/assets/logo_sembranco.png
+    - assets/images/

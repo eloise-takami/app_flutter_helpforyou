@@ -1,13 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:helpforyou/inicio/home.dart';
-import 'package:helpforyou/services/auth_service.dart';
+import 'package:helpforyou/shared/models/usermodel.dart';
+import 'package:helpforyou/services/firebase/auth_service/auth_service.dart';
+import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
+import 'package:helpforyou/services/firebase/firestore_service/firestore_service.dart';
+import 'package:helpforyou/shared/responses/default_response.dart';
+import 'package:provider/provider.dart';
 import 'textfield.dart';
 
-class Cadastro extends StatelessWidget {
+class Cadastro extends StatefulWidget {
+  @override
+  _CadastroState createState() => _CadastroState();
+}
+
+class _CadastroState extends State<Cadastro> {
   String _name;
+
   String _email;
+
   String _password;
+
   String _rg;
+
+  bool _isLoading = false;
+
+  void _signUp() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final signUpResponse = await AuthService.signUp(_email, _password);
+
+    if (signUpResponse.status == ResponseStatus.SUCCESS &&
+        signUpResponse.object != null) {
+      final user = UserModel(
+        id: signUpResponse.object.uid,
+        name: _name,
+        email: _email,
+        rg: _rg,
+      );
+
+      Provider.of<AuthState>(context, listen: false).setUser(user);
+
+      await FirestoreService.saveSignUpData(user);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red.shade700,
+          content: Text('Erro ao tentar realizar cadastro'),
+        ),
+      );
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +63,7 @@ class Cadastro extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("lib/assets/borda2.png"),
+            image: AssetImage("assets/images/borda2.png"),
             fit: BoxFit.fill,
           ),
         ),
@@ -31,7 +78,7 @@ class Cadastro extends StatelessWidget {
               SizedBox(
                 width: 100,
                 height: 100,
-                child: Image.asset("lib/assets/h_sembranco.png"),
+                child: Image.asset("assets/images/h_sembranco.png"),
               ),
               SizedBox(
                 height: 20,
@@ -64,7 +111,7 @@ class Cadastro extends StatelessWidget {
                 child: Container(
                   height: 60,
                   width: 90,
-                  alignment: Alignment.centerLeft,
+                  //alignment: Alignment.centerLeft,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
@@ -83,39 +130,56 @@ class Cadastro extends StatelessWidget {
                         offset: Offset(0, 3),
                       ),
                     ],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30),
-                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
                   ),
-                  child: FlatButton(
-                    onPressed: () async {
-                      bool isValid = await AuthService.signUp(
-                        context,
-                        _name,
-                        _email,
-                        _password,
-                        _rg,
-                      );
-                      if (isValid) {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => Home()),
-                          (route) => false,
-                        );
-                        // Navigator.pop(context);
-                      } else {
-                        print("erro cadastro");
-                      }
-                    },
-                    child: Text(
-                      "                    Sign up",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 20,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      onTap: _isLoading ? null : _signUp,
+                      child: Center(
+                        child: _isLoading
+                            ? CircularProgressIndicator()
+                            : Text(
+                                'Cadastrar',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
                       ),
                     ),
                   ),
+                  // child: FlatButton(
+                  //   onPressed: () async {
+                  //     bool isValid = await AuthService.signUp(
+                  //       context,
+                  //       _name,
+                  //       _email,
+                  //       _password,
+                  //       _rg,
+                  //     );
+                  //     if (isValid) {
+                  //       Navigator.pushAndRemoveUntil(
+                  //         context,
+                  //         MaterialPageRoute(builder: (context) => Home()),
+                  //         (route) => false,
+                  //       );
+                  //       // Navigator.pop(context);
+                  //     } else {
+                  //       print("erro cadastro");
+                  //     }
+                  //   },
+                  //   child: Text(
+                  //     "                    Sign up",
+                  //     style: TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       color: Colors.white,
+                  //       fontSize: 20,
+                  //     ),
+                  //   ),
+                  // ),
                 ),
               ),
             ],
