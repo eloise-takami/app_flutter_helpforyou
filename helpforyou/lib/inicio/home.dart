@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:helpforyou/inicio/login.dart';
 import 'package:helpforyou/pages/pageHome.dart';
 import 'package:helpforyou/pages/pageLampada.dart';
 import 'package:helpforyou/pages/pageLocal.dart';
 import 'package:helpforyou/pages/pageMensagem.dart';
 import 'package:helpforyou/pages/pagePessoa.dart';
+import 'package:helpforyou/services/firebase/auth_service/auth_service.dart';
+import 'package:helpforyou/shared/themes/app_colors.dart';
 
-void main() => runApp(MaterialApp(home: Home()));
+// void main() => runApp(MaterialApp(home: Home()));
 
 class Home extends StatefulWidget {
   @override
@@ -73,7 +76,7 @@ class _HomeState extends State<Home> {
           Icon(
             Icons.lightbulb,
             size: 30,
-            color: Color.fromRGBO(62, 71, 208, 1.0),
+            color: AppColors.roxo_dark, //Color.fromRGBO(62, 71, 208, 1.0),
           ),
           Icon(
             Icons.home,
@@ -109,6 +112,21 @@ class _HomeState extends State<Home> {
           child: _showPage,
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text('Sair'),
+        icon: Icon(Icons.logout),
+        onPressed: () async {
+          final response = await AuthService.logout();
+          if (response) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => Login()),
+              (route) => false,
+            );
+          }
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }
