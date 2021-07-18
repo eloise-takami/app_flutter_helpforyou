@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:helpforyou/services/firebase/auth_service/auth_service.dart';
+import 'package:helpforyou/shared/themes/app_images.dart';
 //import 'resetPassword.dart';
 import 'home.dart';
 import 'cadastro.dart';
+import 'package:helpforyou/services/firebase/auth_service/google_sign_in.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -11,7 +14,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   String _text = '';
-  //var email = Email('eloise.takami@gmail.com', '2Elo_takami2');
+
   IconData iconsenha = Icons.visibility_off; //icone de visibilidade de senha
   int i = 0;
   bool visible = false;
@@ -21,13 +24,6 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
 
-//   void _sendEmail() async {
-//     bool result = await email.sendMessage('help for you recuperação de senha', 'anafurlan2004@gmail.com', 'help for recuperação de senha');
-//     setState(() {
-//       _text = result ? 'Enviado.' : 'Não enviado.';
-//     });
-//  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +31,7 @@ class _LoginState extends State<Login> {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("lib/assets/borda2.png"),
+            image: AssetImage("assets/images/borda2.png"),
             fit: BoxFit.fill,
           ),
         ),
@@ -49,7 +45,7 @@ class _LoginState extends State<Login> {
             SizedBox(
               width: 200,
               height: 200,
-              child: Image.asset("lib/assets/logo_sembranco.png"),
+              child: Image.asset(Imagem.logo_nome),
             ),
             SizedBox(
               height: 20,
@@ -119,7 +115,6 @@ class _LoginState extends State<Login> {
                   textAlign: TextAlign.right,
                 ),
                 onPressed: () {
-                  //  _sendEmail();
                   print(" boatao Forgot password");
                 },
               ),
@@ -174,7 +169,6 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 30,
             ),
-
             Container(
               height: 40,
               alignment: Alignment.centerLeft,

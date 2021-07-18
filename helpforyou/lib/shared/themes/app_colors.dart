@@ -1,5 +1,9 @@
 import 'dart:ui';
 
-class AppColors {
-  static const Color roxo_dark = Color.fromRGBO(62, 71, 208, 1.0);
+import 'package:flutter/material.dart';
+
+class Cor {
+  static const Color roxo = Color.fromRGBO(62, 71, 208, 1.0);
+
+  static Color azul_claro = Colors.cyan[50];
 }

@@ -33,6 +33,7 @@ dependencies:
   firebase_database:
   provider: ^4.3.3
   ffi: ^1.0.0
+  google_sign_in: ^4.5.1
 
   # unsound nullsafety
   speech_recognition: "^0.3.0"

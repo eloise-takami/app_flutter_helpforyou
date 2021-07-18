@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/inicio/login.dart';
+import 'package:helpforyou/services/firebase/auth_service/auth_service.dart';
 import 'package:helpforyou/shared/models/usermodel.dart';
 import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
+import 'package:helpforyou/shared/themes/app_colors.dart';
+import 'package:helpforyou/shared/themes/app_images.dart';
 import 'package:provider/provider.dart';
 
 class PageLampada extends StatefulWidget {
@@ -22,7 +26,7 @@ class _PageLampadaState extends State<PageLampada> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Image(
-          image: AssetImage('assets/images/h_sembranco.png'),
+          image: AssetImage(Imagem.logo_h),
           width: 35.0,
         ),
         actions: <Widget>[
@@ -34,7 +38,7 @@ class _PageLampadaState extends State<PageLampada> {
               },
               child: Icon(
                 Icons.check,
-                color: Color.fromRGBO(63, 71, 206, 1.0),
+                color: Cor.roxo,
                 size: 30,
               ),
             ),
@@ -208,6 +212,21 @@ class _PageLampadaState extends State<PageLampada> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text('Sair da conta'),
+        icon: Icon(Icons.logout),
+        onPressed: () async {
+          final response = await AuthService.logout();
+          if (response) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => Login()),
+              (route) => false,
+            );
+          }
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }

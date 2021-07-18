@@ -4,6 +4,7 @@ import 'package:helpforyou/inicio/home.dart';
 import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
 import 'package:helpforyou/services/firebase/firestore_service/firestore_service.dart';
 import 'package:helpforyou/shared/responses/default_response.dart';
+import 'package:helpforyou/shared/themes/app_images.dart';
 import 'package:provider/provider.dart';
 import 'login.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Container(
                 height: 200,
                 width: 200,
-                child: Image.asset('assets/images/h_sembranco.png'),
+                child: Image.asset(Imagem.logo_h),
               ),
               SizedBox(height: 10),
               CircularProgressIndicator(

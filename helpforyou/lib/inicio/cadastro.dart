@@ -4,6 +4,7 @@ import 'package:helpforyou/services/firebase/auth_service/auth_service.dart';
 import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
 import 'package:helpforyou/services/firebase/firestore_service/firestore_service.dart';
 import 'package:helpforyou/shared/responses/default_response.dart';
+import 'package:helpforyou/shared/themes/app_images.dart';
 import 'package:provider/provider.dart';
 import 'textfield.dart';
 
@@ -63,7 +64,7 @@ class _CadastroState extends State<Cadastro> {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/borda2.png"),
+            image: AssetImage('assets/images/borda2.png'),
             fit: BoxFit.fill,
           ),
         ),
@@ -78,7 +79,7 @@ class _CadastroState extends State<Cadastro> {
               SizedBox(
                 width: 100,
                 height: 100,
-                child: Image.asset("assets/images/h_sembranco.png"),
+                child: Text(Imagem.logo_h),
               ),
               SizedBox(
                 height: 20,

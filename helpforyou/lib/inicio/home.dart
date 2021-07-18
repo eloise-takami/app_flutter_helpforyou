@@ -30,8 +30,8 @@ class _HomeState extends State<Home> {
   Widget _pageChooser(int page) {
     switch (page) {
       case 0:
-        print("pagina localização");
-        return _localizacao;
+        print("pagina feed");
+        return _pessoapage;
         break;
       case 1:
         print("pagina lampada");
@@ -42,9 +42,10 @@ class _HomeState extends State<Home> {
         return _homepage;
         break;
       case 3:
-        print("pagina feed");
-        return _pessoapage;
+        print("pagina localização");
+        return _localizacao;
         break;
+
       case 4:
         print("pagina mensagens");
         return _mensagempage;
@@ -69,34 +70,34 @@ class _HomeState extends State<Home> {
         height: 50.0,
         items: <Widget>[
           Icon(
-            Icons.location_on,
+            Icons.people_alt_sharp,
             size: 30,
-            color: Color.fromRGBO(62, 71, 208, 1.0),
+            color: Cor.roxo,
           ),
           Icon(
             Icons.lightbulb,
             size: 30,
-            color: AppColors.roxo_dark, //Color.fromRGBO(62, 71, 208, 1.0),
+            color: Cor.roxo, //Color.fromRGBO(62, 71, 208, 1.0),
           ),
           Icon(
             Icons.home,
             size: 30,
-            color: Color.fromRGBO(62, 71, 208, 1.0),
+            color: Cor.roxo,
           ),
           Icon(
-            Icons.people_alt_sharp,
+            Icons.location_on,
             size: 30,
-            color: Color.fromRGBO(62, 71, 208, 1.0),
+            color: Cor.roxo,
           ),
           Icon(
             Icons.messenger_outlined,
             size: 30,
-            color: Color.fromRGBO(62, 71, 208, 1.0),
+            color: Cor.roxo,
           ),
         ],
         color: Colors.white,
-        buttonBackgroundColor: Colors.white,
-        backgroundColor: Colors.cyan[50],
+        buttonBackgroundColor: Cor.azul_claro,
+        backgroundColor: Cor.azul_claro,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),
         onTap: (int tappedIndex) {
@@ -107,26 +108,11 @@ class _HomeState extends State<Home> {
         letIndexChange: (index) => true,
       ),
       body: Container(
-        color: Colors.cyan[50],
+        color: Cor.azul_claro,
         child: Center(
           child: _showPage,
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        label: Text('Sair'),
-        icon: Icon(Icons.logout),
-        onPressed: () async {
-          final response = await AuthService.logout();
-          if (response) {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => Login()),
-              (route) => false,
-            );
-          }
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }
