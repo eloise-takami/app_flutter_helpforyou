@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:helpforyou/shared/responses/default_response.dart';
 
 class AuthService {
-  static Future<DefaultResponse<User>> signUp(
+  static Future<DefaultResponse<User?>> signUp(
     String email,
     String password,
   ) async {
@@ -14,11 +14,11 @@ class AuthService {
         password: password,
       );
 
-      User signedInUser = authResult.user;
+      User? signedInUser = authResult.user;
 
-      return ResponseBuilder.success(object: signedInUser);
+      return ResponseBuilder.success<User?>(object: signedInUser);
     } catch (e) {
-      return ResponseBuilder.failed();
+      return ResponseBuilder.failed<User?>(message: e.toString());
     }
   }
 

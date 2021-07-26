@@ -10,7 +10,7 @@ import 'login.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -26,11 +26,11 @@ class _SplashScreenState extends State<SplashScreen> {
         Duration(seconds: 3),
         () async {
           if (user != null) {
-            final response = await FirestoreService.getUserData(user.uid);
+            final response = await FirestoreService.getUserData(user!.uid);
 
             if (response.status == ResponseStatus.SUCCESS) {
               Provider.of<AuthState>(context, listen: false)
-                  .setUser(response.object);
+                  .setUser(response.object!);
             }
           }
         },

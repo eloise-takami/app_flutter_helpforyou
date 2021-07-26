@@ -9,8 +9,8 @@ import 'package:helpforyou/shared/themes/app_images.dart';
 import 'package:provider/provider.dart';
 
 class PageLampada extends StatefulWidget {
-  final UserModel user;
-  const PageLampada({Key key, this.user}) : super(key: key);
+  //final UserModel user;
+  const PageLampada({Key? key}) : super(key: key);
   @override
   _PageLampadaState createState() => _PageLampadaState();
 }
@@ -38,7 +38,7 @@ class _PageLampadaState extends State<PageLampada> {
               },
               child: Icon(
                 Icons.check,
-                color: Cor.roxo,
+                color: AppColors.roxo,
                 size: 30,
               ),
             ),
@@ -97,12 +97,12 @@ class _PageLampadaState extends State<PageLampada> {
                             fontSize: 18,
                           ),
                         ),
-                        validator: (input) => input.trim().length < 2
+                        validator: (input) => input!.trim().length < 2
                             ? 'please enter valid name'
                             : null,
                         style: TextStyle(fontSize: 18),
                         onSaved: (value) {
-                          user.name = value;
+                          user.name = value!;
                         },
                       ),
                       SizedBox(height: 10),
@@ -121,7 +121,7 @@ class _PageLampadaState extends State<PageLampada> {
                         ),
                         style: TextStyle(fontSize: 18),
                         onSaved: (value) {
-                          user.email = value;
+                          user.email = value!;
                         },
                       ),
                       SizedBox(height: 10),
@@ -158,7 +158,7 @@ class _PageLampadaState extends State<PageLampada> {
                         ),
                         style: TextStyle(fontSize: 18),
                         onSaved: (value) {
-                          user.rg = value;
+                          user.rg = value!;
                         },
                       ),
                       SizedBox(

@@ -72,32 +72,32 @@ class _HomeState extends State<Home> {
           Icon(
             Icons.people_alt_sharp,
             size: 30,
-            color: Cor.roxo,
+            color: AppColors.roxo,
           ),
           Icon(
             Icons.lightbulb,
             size: 30,
-            color: Cor.roxo, //Color.fromRGBO(62, 71, 208, 1.0),
+            color: AppColors.roxo, //Color.fromRGBO(62, 71, 208, 1.0),
           ),
           Icon(
             Icons.home,
             size: 30,
-            color: Cor.roxo,
+            color: AppColors.roxo,
           ),
           Icon(
             Icons.location_on,
             size: 30,
-            color: Cor.roxo,
+            color: AppColors.roxo,
           ),
           Icon(
             Icons.messenger_outlined,
             size: 30,
-            color: Cor.roxo,
+            color: AppColors.roxo,
           ),
         ],
         color: Colors.white,
-        buttonBackgroundColor: Cor.azul_claro,
-        backgroundColor: Cor.azul_claro,
+        buttonBackgroundColor: AppColors.azul_claro,
+        backgroundColor: AppColors.azul_claro,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),
         onTap: (int tappedIndex) {
@@ -108,7 +108,7 @@ class _HomeState extends State<Home> {
         letIndexChange: (index) => true,
       ),
       body: Container(
-        color: Cor.azul_claro,
+        color: AppColors.azul_claro,
         child: Center(
           child: _showPage,
         ),

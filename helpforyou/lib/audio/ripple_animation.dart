@@ -3,20 +3,25 @@ import 'package:flutter/animation.dart';
 import 'circle_painter.dart';
 import 'curve_wave.dart';
 
-
 class RipplesAnimation extends StatefulWidget {
-  const RipplesAnimation({Key key, this.size = 80.0, this.color = Colors.purpleAccent,
-    this.onPressed, @required this.child,}) : super(key: key);
+  const RipplesAnimation({
+    Key? key,
+    this.size = 80.0,
+    this.color = Colors.purpleAccent,
+    this.onPressed,
+    required this.child,
+  }) : super(key: key);
   final double size;
   final Color color;
   final Widget child;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   @override
   _RipplesAnimationState createState() => _RipplesAnimationState();
 }
 
-class _RipplesAnimationState extends State<RipplesAnimation> with TickerProviderStateMixin {
-  AnimationController _controller;
+class _RipplesAnimationState extends State<RipplesAnimation>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
   @override
   void initState() {
     super.initState();
@@ -25,11 +30,13 @@ class _RipplesAnimationState extends State<RipplesAnimation> with TickerProvider
       vsync: this,
     )..repeat();
   }
+
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
+
   Widget _button() {
     return Center(
       child: ClipRRect(
@@ -39,7 +46,7 @@ class _RipplesAnimationState extends State<RipplesAnimation> with TickerProvider
             gradient: RadialGradient(
               colors: <Color>[
                 widget.color,
-                Color.lerp(widget.color, Colors.black, .05)
+                //Color.lerp(widget.color, Colors.black, .05)
               ],
             ),
           ),
@@ -50,8 +57,11 @@ class _RipplesAnimationState extends State<RipplesAnimation> with TickerProvider
                   curve: const CurveWave(),
                 ),
               ),
-              child: Icon(Icons.keyboard_voice, size: 44, color: Colors.white,)
-          ),
+              child: Icon(
+                Icons.keyboard_voice,
+                size: 44,
+                color: Colors.white,
+              )),
         ),
       ),
     );

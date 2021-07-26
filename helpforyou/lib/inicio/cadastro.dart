@@ -14,13 +14,13 @@ class Cadastro extends StatefulWidget {
 }
 
 class _CadastroState extends State<Cadastro> {
-  String _name;
+  String? _name;
 
-  String _email;
+  String? _email;
 
-  String _password;
+  String? _password;
 
-  String _rg;
+  String? _rg;
 
   bool _isLoading = false;
 
@@ -29,15 +29,15 @@ class _CadastroState extends State<Cadastro> {
       _isLoading = true;
     });
 
-    final signUpResponse = await AuthService.signUp(_email, _password);
+    final signUpResponse = await AuthService.signUp(_email!, _password!);
 
     if (signUpResponse.status == ResponseStatus.SUCCESS &&
         signUpResponse.object != null) {
       final user = UserModel(
-        id: signUpResponse.object.uid,
-        name: _name,
-        email: _email,
-        rg: _rg,
+        id: signUpResponse.object!.uid,
+        name: _name!,
+        email: _email!,
+        rg: _rg!,
       );
 
       Provider.of<AuthState>(context, listen: false).setUser(user);
@@ -119,7 +119,7 @@ class _CadastroState extends State<Cadastro> {
                       end: Alignment.bottomRight,
                       stops: [0.2, 1],
                       colors: [
-                        Colors.cyan[700],
+                        Colors.cyan[700]!,
                         Color.fromRGBO(118, 125, 219, 1.0),
                       ],
                     ),

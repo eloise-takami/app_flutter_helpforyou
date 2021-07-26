@@ -7,10 +7,10 @@ class UserModel {
   String rg;
 
   UserModel({
-    this.id,
-    this.name,
-    this.email,
-    this.rg,
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.rg,
   });
 
   factory UserModel.fromDoc(DocumentSnapshot doc) {

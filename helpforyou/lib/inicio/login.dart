@@ -19,7 +19,7 @@ class _LoginState extends State<Login> {
   int i = 0;
   bool visible = false;
   bool param = true;
-  String _email;
+  String? _email;
   String _password = "123456";
   final emailController = TextEditingController();
   final passController = TextEditingController();
@@ -131,7 +131,7 @@ class _LoginState extends State<Login> {
                   end: Alignment.bottomRight,
                   stops: [0.2, 1],
                   colors: [
-                    Colors.cyan[700],
+                    Colors.cyan[700]!,
                     Color.fromRGBO(110, 71, 190, 1.0),
                   ],
                 ),
@@ -152,7 +152,7 @@ class _LoginState extends State<Login> {
                     _email = emailController.text;
                     _password = passController.text;
                     print("$_password");
-                    bool isValid = await AuthService.login(_email, _password);
+                    bool isValid = await AuthService.login(_email!, _password);
                     if (isValid) {
                       print("conectado");
                       Navigator.push(
