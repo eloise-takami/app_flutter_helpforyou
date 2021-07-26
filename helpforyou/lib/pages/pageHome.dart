@@ -29,7 +29,7 @@ class PageHome extends StatelessWidget {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
-                    Colors.cyan[700],
+                    Colors.cyan[700]!,
                     Color.fromRGBO(110, 71, 190, 1.0),
                   ],
                 ),

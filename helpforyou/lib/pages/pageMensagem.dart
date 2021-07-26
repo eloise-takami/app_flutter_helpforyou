@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helpforyou/shared/themes/app_images.dart';
 
 class PageMensagem extends StatelessWidget {
   @override
@@ -9,8 +10,8 @@ class PageMensagem extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Image(
-         image: AssetImage('lib/assets/h_sembranco.png'),
-         width: 35.0,
+          image: AssetImage(Imagem.logo_h),
+          width: 35.0,
         ),
       ),
     );

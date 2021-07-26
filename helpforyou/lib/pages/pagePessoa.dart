@@ -1,19 +1,25 @@
+import 'package:helpforyou/shared/themes/app_colors.dart';
+import 'package:helpforyou/shared/themes/app_images.dart';
+
 import 'relato.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PagePessoa extends StatefulWidget {
-  const PagePessoa({ Key key }) : super(key: key);
+  const PagePessoa({Key? key}) : super(key: key);
 
   @override
   _PagePessoaState createState() => _PagePessoaState();
 }
 
 class _PagePessoaState extends State<PagePessoa> {
-
-  String valueChoose;
-  List listItem = [
-    "Violência sexual","Violência patrimonial","Violência fisica","Violência moral","Violência psicológica"
+  String? valueChoose;
+  final listItem = <String>[
+    "Violência sexual",
+    "Violência patrimonial",
+    "Violência fisica",
+    "Violência moral",
+    "Violência psicológica"
   ];
 
   @override
@@ -24,19 +30,19 @@ class _PagePessoaState extends State<PagePessoa> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Image(
-         image: AssetImage('lib/assets/h_sembranco.png'),
-         width: 35.0,
+          image: AssetImage(Imagem.logo_h),
+          width: 35.0,
         ),
         actions: <Widget>[
           Padding(
-            padding: EdgeInsets.only(right:20.0),
-            child: GestureDetector( 
-              onTap: (){
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
                 print("notificação");
               },
               child: Icon(
                 Icons.notifications,
-                color: Color.fromRGBO(63,71,206,1.0),
+                color: Color.fromRGBO(63, 71, 206, 1.0),
                 size: 30,
               ),
             ),
@@ -44,71 +50,73 @@ class _PagePessoaState extends State<PagePessoa> {
         ],
       ),
       body: Container(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Container(
-          padding: EdgeInsets.only(left:5, right:2),
-          decoration: new BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
-          border: new Border.all( color:Color.fromRGBO(63,71,206,1.0), width:3),
-          color: Colors.cyan[100],
-          boxShadow: [
-           BoxShadow(
-            offset: Offset(0, 3),
-            blurRadius: 10,
-            color: Colors.black,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            padding: EdgeInsets.only(left: 5, right: 2),
+            decoration: new BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              border: new Border.all(
+                  color: Color.fromRGBO(63, 71, 206, 1.0), width: 3),
+              color: AppColors.azul_claro,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 3),
+                  blurRadius: 10,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+            child: DropdownButton<String>(
+              hint: Text(
+                "Categorias",
+                style: GoogleFonts.breeSerif(
+                  textStyle: Theme.of(context).textTheme.headline4,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w900,
+                  fontStyle: FontStyle.normal,
+                  color: AppColors.roxo,
+                ),
+              ),
+              dropdownColor: Colors.white,
+              icon: Icon(
+                Icons.arrow_drop_down,
+                color: AppColors.roxo,
+              ),
+              iconSize: 30,
+              style: GoogleFonts.breeSerif(
+                textStyle: Theme.of(context).textTheme.headline4,
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                fontStyle: FontStyle.normal,
+                color: AppColors.roxo,
+              ),
+              value: valueChoose,
+              onChanged: (newValue) {
+                setState(() {
+                  valueChoose = newValue;
+                });
+              },
+              items: listItem.map((valueItem) {
+                return DropdownMenuItem<String>(
+                  value: valueItem,
+                  child: Text(valueItem),
+                );
+              }).toList(),
+            ),
           ),
-          ],
-          ),
-          child: DropdownButton(
-            hint: Text("            Categorias",
-            style: GoogleFonts.breeSerif(
-              textStyle: Theme.of(context).textTheme.headline4,
-              fontSize: 16,
-              fontWeight: FontWeight.w900,
-              fontStyle: FontStyle.normal,
-              color: Color.fromRGBO(62,71,208,1.0),
-            ),
-            ),
-            dropdownColor: Colors.white,
-            icon: Icon(Icons.arrow_drop_down, color: Color.fromRGBO(62,71,208,1.0)),
-            iconSize: 30,
-            
-            style: GoogleFonts.breeSerif(
-              textStyle: Theme.of(context).textTheme.headline4,
-              fontSize: 16,
-              fontWeight: FontWeight.w900,
-              fontStyle: FontStyle.normal,
-              color: Color.fromRGBO(62,71,208,1.0),
-            ),
-            value: valueChoose,
-            onChanged: (newValue){
-              setState(() {
-                valueChoose = newValue;
-              });
-            },
-            items: listItem.map((valueItem){
-              return DropdownMenuItem( 
-                value:valueItem,
-                child: Text(valueItem),
-              );
-            }).toList(),
-         ),
         ),
       ),
-    ),
-    floatingActionButton: FloatingActionButton(
-      child: Icon(Icons.create,color: Color.fromRGBO(62,71,208,1.0)),
-      backgroundColor: Colors.white,
-      onPressed: (){
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Relato()),
-        );
-      },
-    )
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.create, color: AppColors.roxo),
+        backgroundColor: Colors.white,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Relato()),
+          );
+        },
+      ),
     );
-
-
   }
 }

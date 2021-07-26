@@ -5,14 +5,13 @@ class UserModel {
   String name;
   String email;
   String rg;
-  
 
-  UserModel(
-      {this.id,
-      this.name,
-      this.email,
-      this.rg,
-      });
+  UserModel({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.rg,
+  });
 
   factory UserModel.fromDoc(DocumentSnapshot doc) {
     return UserModel(

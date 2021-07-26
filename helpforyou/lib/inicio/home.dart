@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:helpforyou/inicio/login.dart';
 import 'package:helpforyou/pages/pageHome.dart';
 import 'package:helpforyou/pages/pageLampada.dart';
 import 'package:helpforyou/pages/pageLocal.dart';
 import 'package:helpforyou/pages/pageMensagem.dart';
 import 'package:helpforyou/pages/pagePessoa.dart';
+import 'package:helpforyou/services/firebase/auth_service/auth_service.dart';
+import 'package:helpforyou/shared/themes/app_colors.dart';
 
-void main() => runApp(MaterialApp(home: Home()));
+// void main() => runApp(MaterialApp(home: Home()));
 
 class Home extends StatefulWidget {
   @override
@@ -27,8 +30,8 @@ class _HomeState extends State<Home> {
   Widget _pageChooser(int page) {
     switch (page) {
       case 0:
-        print("pagina localização");
-        return _localizacao;
+        print("pagina feed");
+        return _pessoapage;
         break;
       case 1:
         print("pagina lampada");
@@ -39,9 +42,10 @@ class _HomeState extends State<Home> {
         return _homepage;
         break;
       case 3:
-        print("pagina feed");
-        return _pessoapage;
+        print("pagina localização");
+        return _localizacao;
         break;
+
       case 4:
         print("pagina mensagens");
         return _mensagempage;
@@ -66,34 +70,34 @@ class _HomeState extends State<Home> {
         height: 50.0,
         items: <Widget>[
           Icon(
-            Icons.location_on,
+            Icons.people_alt_sharp,
             size: 30,
-            color: Color.fromRGBO(62, 71, 208, 1.0),
+            color: AppColors.roxo,
           ),
           Icon(
             Icons.lightbulb,
             size: 30,
-            color: Color.fromRGBO(62, 71, 208, 1.0),
+            color: AppColors.roxo, //Color.fromRGBO(62, 71, 208, 1.0),
           ),
           Icon(
             Icons.home,
             size: 30,
-            color: Color.fromRGBO(62, 71, 208, 1.0),
+            color: AppColors.roxo,
           ),
           Icon(
-            Icons.people_alt_sharp,
+            Icons.location_on,
             size: 30,
-            color: Color.fromRGBO(62, 71, 208, 1.0),
+            color: AppColors.roxo,
           ),
           Icon(
             Icons.messenger_outlined,
             size: 30,
-            color: Color.fromRGBO(62, 71, 208, 1.0),
+            color: AppColors.roxo,
           ),
         ],
         color: Colors.white,
-        buttonBackgroundColor: Colors.white,
-        backgroundColor: Colors.cyan[50],
+        buttonBackgroundColor: AppColors.azul_claro,
+        backgroundColor: AppColors.azul_claro,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),
         onTap: (int tappedIndex) {
@@ -104,7 +108,7 @@ class _HomeState extends State<Home> {
         letIndexChange: (index) => true,
       ),
       body: Container(
-        color: Colors.cyan[50],
+        color: AppColors.azul_claro,
         child: Center(
           child: _showPage,
         ),
