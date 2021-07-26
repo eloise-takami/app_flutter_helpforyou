@@ -79,7 +79,10 @@ class _PageLampadaState extends State<PageLampada> {
             ),
             Consumer<AuthState>(
               builder: (context, userData, __) {
-                final user = userData.getUser;
+                final response = userData.getUser;
+                final user = response == null
+                    ? UserModel(id: "", name: "name", email: "email", rg: "rg")
+                    : response;
                 return Form(
                   key: _formKey,
                   child: Column(

@@ -6,5 +6,5 @@ class AuthState extends ChangeNotifier {
 
   void setUser(UserModel userModel) => _userModel = userModel;
 
-  UserModel get getUser => _userModel!;
+  UserModel? get getUser => _userModel;
 }
