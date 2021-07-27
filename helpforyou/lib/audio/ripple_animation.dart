@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
+import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'circle_painter.dart';
 import 'curve_wave.dart';
 
@@ -46,7 +47,8 @@ class _RipplesAnimationState extends State<RipplesAnimation>
             gradient: RadialGradient(
               colors: <Color>[
                 widget.color,
-                //Color.lerp(widget.color, Colors.black, .05)
+                AppColors.roxo,
+                //Color.lerp(widget.color, Colors.black, .05),
               ],
             ),
           ),
@@ -72,6 +74,7 @@ class _RipplesAnimationState extends State<RipplesAnimation>
     return Scaffold(
       appBar: AppBar(
         title: Text("Gravando áudio..."),
+        backgroundColor: AppColors.roxo,
       ),
       body: Center(
         child: CustomPaint(
