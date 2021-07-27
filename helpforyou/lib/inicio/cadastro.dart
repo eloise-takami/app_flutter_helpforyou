@@ -84,26 +84,41 @@ class _CadastroState extends State<Cadastro> {
               SizedBox(
                 height: 20,
               ),
-              RoundedNameField(
-                  hintText: "Your Name",
-                  onChanged: (value) {
-                    _name = value;
-                  }),
               RoundedInputField(
-                  hintText: "Your E-mail",
-                  onChanged: (value) {
-                    _email = value;
-                  }),
-              RoundedPasswordField(
-                  hintText: "Your Password",
-                  onChanged: (value) {
-                    _password = value;
-                  }),
-              RoundedCPFField(
-                  hintText: "Your RG",
-                  onChanged: (value) {
-                    _rg = value;
-                  }),
+                hintText: "Nome completo",
+                onChanged: (value) {
+                  _name = value;
+                },
+                autofocus: true,
+                obscureText: false,
+                icon: Icons.person_outline_rounded,
+                keyboardType: TextInputType.name,
+              ),
+              RoundedInputField(
+                hintText: "E-mail",
+                onChanged: (value) {
+                  _email = value;
+                },
+                obscureText: false,
+              ),
+              RoundedInputField(
+                hintText: "Crie uma senha",
+                onChanged: (value) {
+                  _password = value;
+                },
+                autofocus: false,
+                obscureText: true,
+                icon: Icons.lock_outline,
+                keyboardType: TextInputType.visiblePassword,
+              ),
+              RoundedInputField(
+                hintText: "RG",
+                onChanged: (value) {
+                  _rg = value;
+                },
+                icon: Icons.format_list_numbered,
+                keyboardType: TextInputType.number,
+              ),
               SizedBox(
                 height: 30,
               ),
