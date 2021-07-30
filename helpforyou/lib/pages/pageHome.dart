@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/shared/models/usermodel.dart';
+import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
+import 'package:helpforyou/shared/themes/app_colors.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:helpforyou/audio/ripple_animation.dart';
 
@@ -11,6 +16,16 @@ fazerLigacao() async {
     throw 'Could not launch $url';
   }
 }
+
+List<String> recipents = ["997853422", "9976257644"];
+
+// Future<void> _sendSMS(String message, List<String> recipents) async {
+//   String _result = await sendSMS(message: message, recipients: recipents)
+//       .catchError((onError) {
+//     print(onError);
+//   });
+//   print(_result);
+// }
 
 class PageHome extends StatelessWidget {
   @override
@@ -125,7 +140,7 @@ class PageHome extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => RipplesAnimation(
                                 size: 80.0,
-                                color: Color.fromRGBO(62, 71, 208, 1.0),
+                                color: AppColors.roxo,
                                 onPressed: () {},
                                 child: Container(),
                               ),
@@ -176,6 +191,9 @@ class PageHome extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           print("botao reporte");
+                          //   _sendSMS(
+                          //       "Help for you: A usuária _ mandou um pedido de socorro. Entre em contato. ",
+                          //       recipents);
                         },
                         child: Container(
                           height: 102.5,
