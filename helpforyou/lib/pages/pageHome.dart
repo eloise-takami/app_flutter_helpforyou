@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sms/flutter_sms.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/pages/page_audio_recorder.dart';
 import 'package:helpforyou/shared/models/usermodel.dart';
 import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
@@ -138,12 +139,14 @@ class PageHome extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => RipplesAnimation(
-                                size: 80.0,
-                                color: AppColors.roxo,
-                                onPressed: () {},
-                                child: Container(),
-                              ),
+                              builder: (context) => PageAudioRecorder(),
+
+                              // RipplesAnimation(
+                              //   size: 80.0,
+                              //   color: AppColors.roxo,
+                              //   onPressed: () {},
+                              //   child: Container(),
+                              // ),
                             ),
                           );
                         },

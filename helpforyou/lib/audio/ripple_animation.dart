@@ -17,10 +17,12 @@ class RipplesAnimation extends StatefulWidget {
     this.onPressed,
     required this.child,
   }) : super(key: key);
+
   final double size;
   final Color color;
   final Widget child;
   final VoidCallback? onPressed;
+
   @override
   _RipplesAnimationState createState() => _RipplesAnimationState();
 }
@@ -30,6 +32,7 @@ class _RipplesAnimationState extends State<RipplesAnimation>
   late Directory appDirectory;
   List<String> records = [];
   late AnimationController _controller;
+
   @override
   void initState() {
     super.initState();
@@ -37,7 +40,7 @@ class _RipplesAnimationState extends State<RipplesAnimation>
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     )..repeat();
-    super.initState();
+    //super.initState();
     getApplicationDocumentsDirectory().then((value) {
       appDirectory = value;
       appDirectory.list().listen((onData) {
@@ -52,8 +55,8 @@ class _RipplesAnimationState extends State<RipplesAnimation>
   @override
   void dispose() {
     _controller.dispose();
-    super.dispose();
     appDirectory.delete();
+    super.dispose();
   }
 
   Widget _button() {
@@ -76,17 +79,18 @@ class _RipplesAnimationState extends State<RipplesAnimation>
               ),
             ),
             child: ScaleTransition(
-                scale: Tween(begin: 0.95, end: 1.0).animate(
-                  CurvedAnimation(
-                    parent: _controller,
-                    curve: const CurveWave(),
-                  ),
+              scale: Tween(begin: 0.95, end: 1.0).animate(
+                CurvedAnimation(
+                  parent: _controller,
+                  curve: const CurveWave(),
                 ),
-                child: Icon(
-                  Icons.keyboard_voice,
-                  size: 44,
-                  color: Colors.white,
-                )),
+              ),
+              child: Icon(
+                Icons.keyboard_voice,
+                size: 44,
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
       ),

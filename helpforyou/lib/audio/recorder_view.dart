@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_audio_recorder2/flutter_audio_recorder2.dart';
 
 class RecorderView extends StatefulWidget {
-  final Function onSaved;
+  final VoidCallback onSaved;
 
   const RecorderView({Key? key, required this.onSaved}) : super(key: key);
   @override
@@ -69,11 +69,12 @@ class _RecorderViewState extends State<RecorderView> {
           ),
         ),
         Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              child: Text(_recordText),
-              padding: const EdgeInsets.all(8),
-            ))
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            child: Text(_recordText),
+            padding: const EdgeInsets.all(8),
+          ),
+        ),
       ],
     );
   }
