@@ -1,22 +1,19 @@
 import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:helpforyou/services/database/database_service.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:helpforyou/inicio/home.dart';
-import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
-import 'package:helpforyou/services/firebase/firestore_service/firestore_service.dart';
+import 'package:helpforyou/shared/providers/auth_state.dart';
 import 'package:helpforyou/shared/responses/default_response.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
-import 'package:provider/provider.dart';
-import 'login.dart';
-import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+import '../app/app_page.dart';
+import '../signin/signin_page.dart';
 
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
+class SplashPage extends StatelessWidget {
+  SplashPage({Key? key}) : super(key: key);
 
-class _SplashScreenState extends State<SplashScreen> {
   final user = FirebaseAuth.instance.currentUser;
 
   @override
@@ -26,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Duration(seconds: 3),
         () async {
           if (user != null) {
-            final response = await FirestoreService.getUserData(user!.uid);
+            final response = await DatabaseService.getUserData(user!.uid);
 
             if (response.status == ResponseStatus.SUCCESS) {
               Provider.of<AuthState>(context, listen: false)
@@ -37,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return user != null ? Home() : Login();
+          return user != null ? AppPage() : SigninPage();
         }
         return Scaffold(
           body: Center(

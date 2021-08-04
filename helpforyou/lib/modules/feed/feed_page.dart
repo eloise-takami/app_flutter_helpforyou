@@ -1,18 +1,18 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
 
-import 'relato.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'post/new_post_page.dart';
 
-class PagePessoa extends StatefulWidget {
-  const PagePessoa({Key? key}) : super(key: key);
+class FeedPage extends StatefulWidget {
+  const FeedPage({Key? key}) : super(key: key);
 
   @override
-  _PagePessoaState createState() => _PagePessoaState();
+  _FeedPageState createState() => _FeedPageState();
 }
 
-class _PagePessoaState extends State<PagePessoa> {
+class _FeedPageState extends State<FeedPage> {
   String? valueChoose;
   final listItem = <String>[
     "Violência sexual",
@@ -113,7 +113,7 @@ class _PagePessoaState extends State<PagePessoa> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Relato()),
+            MaterialPageRoute(builder: (context) => NewPostPage()),
           );
         },
       ),

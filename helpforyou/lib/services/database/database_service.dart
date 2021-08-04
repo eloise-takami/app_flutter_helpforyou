@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:helpforyou/shared/models/user_model.dart';
 import 'package:helpforyou/shared/responses/default_response.dart';
 
-class FirestoreService {
+class DatabaseService {
   static Future<void> saveSignUpData(UserModel userModel) async {
     final documentReference =
         FirebaseFirestore.instance.collection('users').doc(userModel.id);

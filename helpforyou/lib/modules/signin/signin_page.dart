@@ -1,18 +1,18 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:helpforyou/services/firebase/auth_service/auth_service.dart';
+import 'package:helpforyou/services/auth/auth_service.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
-//import 'resetPassword.dart';
-import 'home.dart';
-import 'cadastro.dart';
-import 'package:helpforyou/services/firebase/auth_service/google_sign_in.dart';
 
-class Login extends StatefulWidget {
+import '../signup/signup_page.dart';
+import '../app/app_page.dart';
+
+class SigninPage extends StatefulWidget {
+  const SigninPage({Key? key}) : super(key: key);
+
   @override
-  _LoginState createState() => _LoginState();
+  _SigninPageState createState() => _SigninPageState();
 }
 
-class _LoginState extends State<Login> {
+class _SigninPageState extends State<SigninPage> {
   String _text = '';
 
   IconData iconsenha = Icons.visibility_off; //icone de visibilidade de senha
@@ -157,7 +157,7 @@ class _LoginState extends State<Login> {
                       print("conectado");
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Home()),
+                        MaterialPageRoute(builder: (context) => AppPage()),
                       );
                     } else {
                       print('login problem');
@@ -188,7 +188,7 @@ class _LoginState extends State<Login> {
                   onPressed: () => {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Cadastro()),
+                      MaterialPageRoute(builder: (context) => SignupPage()),
                     ),
                   },
                 ),
@@ -199,38 +199,38 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-}
 
-Widget _montarTextoBotao(String textoBotao) {
-  return Text(
-    textoBotao,
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      color: Colors.white,
-      fontSize: 20,
-    ),
-  );
-}
-
-Widget _montarTextField(String titulo, bool visible, Icon icon) {
-  return TextFormField(
-    //autofocus: true
-    obscureText: visible,
-
-    keyboardType: TextInputType.emailAddress, //aparece o @
-
-    decoration: InputDecoration(
-      border: InputBorder.none,
-      icon: icon,
-      labelText: titulo,
-      labelStyle: TextStyle(
-        color: Colors.black38,
-        fontWeight: FontWeight.w400,
+  Widget _montarTextoBotao(String textoBotao) {
+    return Text(
+      textoBotao,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
         fontSize: 20,
       ),
-    ),
-    style: TextStyle(
-      fontSize: 20,
-    ),
-  );
+    );
+  }
+
+  Widget _montarTextField(String titulo, bool visible, Icon icon) {
+    return TextFormField(
+      //autofocus: true
+      obscureText: visible,
+
+      keyboardType: TextInputType.emailAddress, //aparece o @
+
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        icon: icon,
+        labelText: titulo,
+        labelStyle: TextStyle(
+          color: Colors.black38,
+          fontWeight: FontWeight.w400,
+          fontSize: 20,
+        ),
+      ),
+      style: TextStyle(
+        fontSize: 20,
+      ),
+    );
+  }
 }

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:helpforyou/inicio/login.dart';
-import 'package:helpforyou/services/firebase/auth_service/auth_service.dart';
+import 'package:helpforyou/services/auth/auth_service.dart';
 import 'package:helpforyou/shared/models/user_model.dart';
-import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
+import 'package:helpforyou/shared/providers/auth_state.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
 import 'package:provider/provider.dart';
 
-class PageLampada extends StatefulWidget {
-  //final UserModel user;
-  const PageLampada({Key? key}) : super(key: key);
+import '../signin/signin_page.dart';
+
+class RegistrationDataPage extends StatefulWidget {
+  const RegistrationDataPage({Key? key}) : super(key: key);
+
   @override
-  _PageLampadaState createState() => _PageLampadaState();
+  _RegistrationDataPageState createState() => _RegistrationDataPageState();
 }
 
-class _PageLampadaState extends State<PageLampada> {
+class _RegistrationDataPageState extends State<RegistrationDataPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -223,7 +224,7 @@ class _PageLampadaState extends State<PageLampada> {
           if (response) {
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => Login()),
+              MaterialPageRoute(builder: (context) => SigninPage()),
               (route) => false,
             );
           }

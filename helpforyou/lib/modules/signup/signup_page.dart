@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:helpforyou/services/auth/auth_service.dart';
+import 'package:helpforyou/services/database/database_service.dart';
 import 'package:helpforyou/shared/models/user_model.dart';
-import 'package:helpforyou/services/firebase/auth_service/auth_service.dart';
-import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
-import 'package:helpforyou/services/firebase/firestore_service/firestore_service.dart';
+import 'package:helpforyou/shared/providers/auth_state.dart';
 import 'package:helpforyou/shared/responses/default_response.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
+import 'package:helpforyou/shared/widgets/rounded_input_text_field.dart';
 import 'package:provider/provider.dart';
-import 'textfield.dart';
 
-class Cadastro extends StatefulWidget {
+class SignupPage extends StatefulWidget {
+  const SignupPage({Key? key}) : super(key: key);
+
   @override
-  _CadastroState createState() => _CadastroState();
+  _SignupPageState createState() => _SignupPageState();
 }
 
-class _CadastroState extends State<Cadastro> {
+class _SignupPageState extends State<SignupPage> {
   String? _name;
 
   String? _email;
@@ -42,7 +44,7 @@ class _CadastroState extends State<Cadastro> {
 
       Provider.of<AuthState>(context, listen: false).setUser(user);
 
-      await FirestoreService.saveSignUpData(user);
+      await DatabaseService.saveSignUpData(user);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -84,7 +86,7 @@ class _CadastroState extends State<Cadastro> {
               SizedBox(
                 height: 20,
               ),
-              RoundedInputField(
+              RoundedInputTextField(
                 hintText: "Nome completo",
                 onChanged: (value) {
                   _name = value;
@@ -94,14 +96,14 @@ class _CadastroState extends State<Cadastro> {
                 icon: Icons.person_outline_rounded,
                 keyboardType: TextInputType.name,
               ),
-              RoundedInputField(
+              RoundedInputTextField(
                 hintText: "E-mail",
                 onChanged: (value) {
                   _email = value;
                 },
                 obscureText: false,
               ),
-              RoundedInputField(
+              RoundedInputTextField(
                 hintText: "Crie uma senha",
                 onChanged: (value) {
                   _password = value;
@@ -111,7 +113,7 @@ class _CadastroState extends State<Cadastro> {
                 icon: Icons.lock_outline,
                 keyboardType: TextInputType.visiblePassword,
               ),
-              RoundedInputField(
+              RoundedInputTextField(
                 hintText: "RG",
                 onChanged: (value) {
                   _rg = value;

@@ -1,13 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
-import 'circle_painter.dart';
-import 'curve_wave.dart';
-import 'recorder_view.dart';
-import 'package:path_provider/path_provider.dart';
-import 'recorded_list_view.dart';
+import '../widgets/circle_painter.dart';
 
 class RippleAnimation extends StatefulWidget {
   const RippleAnimation({

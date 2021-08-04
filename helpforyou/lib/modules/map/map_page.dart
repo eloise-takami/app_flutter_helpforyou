@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
 import 'package:latlong2/latlong.dart';
 
-void main() => runApp(PageLocal());
+class MapPage extends StatefulWidget {
+  const MapPage({Key? key}) : super(key: key);
 
-class PageLocal extends StatefulWidget {
   @override
-  _PageLocalState createState() => _PageLocalState();
+  _MapPageState createState() => _MapPageState();
 }
 
-class _PageLocalState extends State<PageLocal> {
+class _MapPageState extends State<MapPage> {
   // Lista de pontos adicionados ao clicar na tela <LatLng>
   List<LatLng> tappedPoints = [];
 
@@ -223,17 +223,3 @@ class _PageLocalState extends State<PageLocal> {
     );
   }
 }
-// Widget _montarIcon(Icon icon){
-//   Icon icon;
-//   return Container(
-//         color: Colors.cyan[100],
-//         height: 70,
-//         width: 10,
-//         icon: icon,
-//         child: Icon(
-//           icon, 
-//           color:Color.fromRGBO(62,71,208,1.0),
-//           size:50,
-//         ),
-//   );
-// }

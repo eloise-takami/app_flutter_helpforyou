@@ -1,17 +1,13 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:helpforyou/audio/recorded_list_view.dart';
-import 'package:helpforyou/audio/recorder_view.dart';
-import 'package:path_provider/path_provider.dart';
 
-class PageAudioRecorder extends StatefulWidget {
-  const PageAudioRecorder({Key? key}) : super(key: key);
+class AudioRecordPage extends StatefulWidget {
+  const AudioRecordPage({Key? key}) : super(key: key);
 
   @override
-  _PageAudioRecorderState createState() => _PageAudioRecorderState();
+  _AudioRecordPageState createState() => _AudioRecordPageState();
 }
 
-class _PageAudioRecorderState extends State<PageAudioRecorder> {
+class _AudioRecordPageState extends State<AudioRecordPage> {
   // late Directory appDirectory;
   // List<String> records = [];
 
@@ -41,28 +37,30 @@ class _PageAudioRecorderState extends State<PageAudioRecorder> {
       appBar: AppBar(
         title: Text('widget._title'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: RecordListView(
-                //records: records,
-                ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: kElevationToShadow[1],
-              ),
-              child: RecorderView(
-                onSaved: _onRecordComplete,
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: Container(),
+
+      // Column(
+      //   children: [
+      //     Expanded(
+      //       flex: 2,
+      //       child: RecordListView(
+      //           //records: records,
+      //           ),
+      //     ),
+      //     Expanded(
+      //       flex: 1,
+      //       child: Container(
+      //         decoration: BoxDecoration(
+      //           color: Colors.white,
+      //           boxShadow: kElevationToShadow[1],
+      //         ),
+      //         child: RecorderView(
+      //           onSaved: _onRecordComplete,
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 

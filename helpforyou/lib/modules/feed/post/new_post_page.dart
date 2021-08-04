@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Relato extends StatefulWidget {
-  const Relato({Key? key}) : super(key: key);
+class NewPostPage extends StatefulWidget {
+  const NewPostPage({Key? key}) : super(key: key);
 
   @override
-  _RelatoState createState() => _RelatoState();
+  _NewPostPageState createState() => _NewPostPageState();
 }
 
-class _RelatoState extends State<Relato> {
+class _NewPostPageState extends State<NewPostPage> {
   String? _relato;
   String? valueChoose;
   final listItem = <String>[

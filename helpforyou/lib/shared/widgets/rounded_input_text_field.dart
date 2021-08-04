@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
 
-class RoundedInputField extends StatelessWidget {
-  const RoundedInputField({
+import 'text_field_container.dart';
+
+class RoundedInputTextField extends StatelessWidget {
+  const RoundedInputTextField({
     Key? key,
     this.hintText,
     this.onChanged,
@@ -37,27 +39,6 @@ class RoundedInputField extends StatelessWidget {
           border: InputBorder.none,
         ),
       ),
-    );
-  }
-}
-
-class TextFieldContainer extends StatelessWidget {
-  final Widget child;
-  const TextFieldContainer({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      width: size.width * 0.8,
-      decoration: BoxDecoration(
-          color: Color.fromRGBO(172, 176, 234, 1.0),
-          borderRadius: BorderRadius.circular(30)),
-      child: child,
     );
   }
 }
