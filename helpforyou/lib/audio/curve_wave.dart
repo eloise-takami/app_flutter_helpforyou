@@ -4,6 +4,7 @@ import 'package:flutter/animation.dart';
 
 class CurveWave extends Curve {
   const CurveWave();
+
   @override
   double transform(double t) {
     if (t == 0 || t == 1) {

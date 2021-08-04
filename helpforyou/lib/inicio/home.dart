@@ -88,8 +88,8 @@ class _HomeState extends State<Home> {
           ),
         ],
         color: Colors.white,
-        buttonBackgroundColor: AppColors.azul_claro,
-        backgroundColor: AppColors.azul_claro,
+        buttonBackgroundColor: AppColors.azulClaro,
+        backgroundColor: AppColors.azulClaro,
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),
         onTap: (int tappedIndex) {
@@ -100,7 +100,7 @@ class _HomeState extends State<Home> {
         letIndexChange: (index) => true,
       ),
       body: Container(
-        color: AppColors.azul_claro,
+        color: AppColors.azulClaro,
         child: Center(
           child: _showPage,
         ),

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
+import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'inicio/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class TCC extends StatelessWidget {
       title: 'Pelas mulheres',
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: AppColors.primarySwatch, //Colors.deepPurple,
       ),
       home: SplashScreen(),
       color: Colors.white,
@@ -30,9 +31,9 @@ class TCC extends StatelessWidget {
   }
 }
 
-class DemoPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Container(color: Color.fromRGBO(63, 71, 206, 1.0)));
-  }
-}
+// class DemoPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(body: Container(color: Color.fromRGBO(63, 71, 206, 1.0)));
+//   }
+// }

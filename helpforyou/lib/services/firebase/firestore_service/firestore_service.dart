@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:helpforyou/shared/models/usermodel.dart';
+import 'package:helpforyou/shared/models/user_model.dart';
 import 'package:helpforyou/shared/responses/default_response.dart';
 
 class FirestoreService {

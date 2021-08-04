@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helpforyou/inicio/login.dart';
 import 'package:helpforyou/services/firebase/auth_service/auth_service.dart';
-import 'package:helpforyou/shared/models/usermodel.dart';
+import 'package:helpforyou/shared/models/user_model.dart';
 import 'package:helpforyou/shared/providers/auth_state/auth_state.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';

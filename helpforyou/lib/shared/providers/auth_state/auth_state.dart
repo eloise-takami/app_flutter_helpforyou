@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:helpforyou/shared/models/usermodel.dart';
+import 'package:helpforyou/shared/models/user_model.dart';
 
 class AuthState extends ChangeNotifier {
   UserModel? _userModel;

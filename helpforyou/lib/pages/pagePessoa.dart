@@ -58,7 +58,7 @@ class _PagePessoaState extends State<PagePessoa> {
               borderRadius: BorderRadius.circular(20.0),
               border: new Border.all(
                   color: Color.fromRGBO(63, 71, 206, 1.0), width: 3),
-              color: AppColors.azul_claro,
+              color: AppColors.azulClaro,
               boxShadow: [
                 BoxShadow(
                   offset: Offset(0, 3),

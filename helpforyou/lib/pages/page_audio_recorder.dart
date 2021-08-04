@@ -12,28 +12,28 @@ class PageAudioRecorder extends StatefulWidget {
 }
 
 class _PageAudioRecorderState extends State<PageAudioRecorder> {
-  late Directory appDirectory;
-  List<String> records = [];
+  // late Directory appDirectory;
+  // List<String> records = [];
 
-  @override
-  void initState() {
-    super.initState();
-    getApplicationDocumentsDirectory().then((value) {
-      appDirectory = value;
-      appDirectory.list().listen((onData) {
-        if (onData.path.contains('.aac')) records.add(onData.path);
-      }).onDone(() {
-        records = records.reversed.toList();
-        setState(() {});
-      });
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getApplicationDocumentsDirectory().then((value) {
+  //     appDirectory = value;
+  //     appDirectory.list().listen((onData) {
+  //       if (onData.path.contains('.aac')) records.add(onData.path);
+  //     }).onDone(() {
+  //       records = records.reversed.toList();
+  //       setState(() {});
+  //     });
+  //   });
+  // }
 
-  @override
-  void dispose() {
-    appDirectory.delete();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   appDirectory.delete();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +46,19 @@ class _PageAudioRecorderState extends State<PageAudioRecorder> {
           Expanded(
             flex: 2,
             child: RecordListView(
-              records: records,
-            ),
+                //records: records,
+                ),
           ),
           Expanded(
             flex: 1,
-            child: RecorderView(
-              onSaved: _onRecordComplete,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: kElevationToShadow[1],
+              ),
+              child: RecorderView(
+                onSaved: _onRecordComplete,
+              ),
             ),
           ),
         ],
@@ -61,13 +67,13 @@ class _PageAudioRecorderState extends State<PageAudioRecorder> {
   }
 
   void _onRecordComplete() {
-    records.clear();
-    appDirectory.list().listen((onData) {
-      if (onData.path.contains('.aac')) records.add(onData.path);
-    }).onDone(() {
-      records.sort();
-      records = records.reversed.toList();
-      setState(() {});
-    });
+    // records.clear();
+    // appDirectory.list().listen((onData) {
+    //   if (onData.path.contains('.aac')) records.add(onData.path);
+    // }).onDone(() {
+    //   records.sort();
+    //   records = records.reversed.toList();
+    //   setState(() {});
+    // });
   }
 }

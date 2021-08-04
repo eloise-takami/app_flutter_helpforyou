@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:helpforyou/audio/ripple_animation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_audio_recorder2/flutter_audio_recorder2.dart';
 
@@ -20,8 +21,8 @@ enum RecordingState {
 }
 
 class _RecorderViewState extends State<RecorderView> {
-  IconData _recordIcon = Icons.mic_none;
-  String _recordText = 'Click To Start';
+  // IconData _recordIcon = Icons.mic_none;
+  // String _recordText = 'Click To Start';
   RecordingState _recordingState = RecordingState.UnSet;
 
   // Recorder properties
@@ -34,49 +35,56 @@ class _RecorderViewState extends State<RecorderView> {
     FlutterAudioRecorder2.hasPermissions.then((hasPermision) {
       if (hasPermision!) {
         _recordingState = RecordingState.Set;
-        _recordIcon = Icons.mic;
-        _recordText = 'Record';
+        // _recordIcon = Icons.mic;
+        // _recordText = 'Record';
       }
     });
   }
 
-  @override
-  void dispose() {
-    _recordingState = RecordingState.UnSet;
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _recordingState = RecordingState.UnSet;
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        MaterialButton(
-          onPressed: () async {
-            await _onRecordButtonPressed();
-            setState(() {});
-          },
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: Container(
-            width: 150,
-            height: 150,
-            child: Icon(
-              _recordIcon,
-              size: 50,
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            child: Text(_recordText),
-            padding: const EdgeInsets.all(8),
-          ),
-        ),
-      ],
+    return RippleAnimation(
+      onPressed: () async {
+        await _onRecordButtonPressed();
+        //setState(() {});
+      },
     );
+
+    // Stack(
+    //   alignment: Alignment.center,
+    //   children: [
+    //     MaterialButton(
+    //       onPressed: () async {
+    //         await _onRecordButtonPressed();
+    //         setState(() {});
+    //       },
+    //       shape: RoundedRectangleBorder(
+    //         borderRadius: BorderRadius.circular(50),
+    //       ),
+    //       child: Container(
+    //         width: 150,
+    //         height: 150,
+    //         child: Icon(
+    //           _recordIcon,
+    //           size: 50,
+    //         ),
+    //       ),
+    //     ),
+    //     Align(
+    //       alignment: Alignment.bottomCenter,
+    //       child: Padding(
+    //         child: Text(_recordText),
+    //         padding: const EdgeInsets.all(8),
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
 
   Future<void> _onRecordButtonPressed() async {
@@ -88,8 +96,8 @@ class _RecorderViewState extends State<RecorderView> {
       case RecordingState.Recording:
         await _stopRecording();
         _recordingState = RecordingState.Stopped;
-        _recordIcon = Icons.fiber_manual_record;
-        _recordText = 'Record new one';
+        // _recordIcon = Icons.fiber_manual_record;
+        // _recordText = 'Record new one';
         break;
 
       case RecordingState.Stopped:
@@ -99,14 +107,16 @@ class _RecorderViewState extends State<RecorderView> {
       case RecordingState.UnSet:
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Please allow recording from settings.'),
-        ));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Please allow recording from settings.'),
+          ),
+        );
         break;
     }
   }
 
-  _initRecorder() async {
+  Future<void> _initRecorder() async {
     Directory appDirectory = await getApplicationDocumentsDirectory();
     String filePath = appDirectory.path +
         '/' +
@@ -118,12 +128,12 @@ class _RecorderViewState extends State<RecorderView> {
     await audioRecorder.initialized;
   }
 
-  _startRecording() async {
+  Future<void> _startRecording() async {
     await audioRecorder.start();
     // await audioRecorder.current(channel: 0);
   }
 
-  _stopRecording() async {
+  Future<void> _stopRecording() async {
     await audioRecorder.stop();
 
     widget.onSaved();
@@ -136,13 +146,15 @@ class _RecorderViewState extends State<RecorderView> {
 
       await _startRecording();
       _recordingState = RecordingState.Recording;
-      _recordIcon = Icons.stop;
-      _recordText = 'Recording';
+      // _recordIcon = Icons.stop;
+      // _recordText = 'Recording';
     } else {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Please allow recording from settings.'),
-      ));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Please allow recording from settings.'),
+        ),
+      );
     }
   }
 }
