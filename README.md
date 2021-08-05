@@ -9,7 +9,7 @@
 <p align="center">|&nbsp;&nbsp;&nbsp;
   <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-como-contribuir">Como contribuir</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-como-contribuir">Como usar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 </p>
 
 <br>
@@ -31,14 +31,21 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 O Help for you é um aplicativo mobile que visa influenciar e auxiliar mulheres, vítimas de todo tipo de violência, a dununciar casos de agressões sofridas por ela e por outras.
 
-## 🤔 Como contribuir
+## 🤔 Como Usar 
 
-- Faça um fork desse repositório;
-- Cria uma branch com a sua feature: `git checkout -b minha-feature`;
-- Faça commit das suas alterações: `git commit -m 'feat: Minha nova feature'`;
-- Faça push para a sua branch: `git push origin minha-feature`.
+   ```
+   - Clone esse repositório:
+   $ git clone https://github.com/rocketseat-education/nlw-06-flutter
 
-Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
+   - Entre no diretório:
+   $ cd nlw-06-flutter
+
+   - Instale as dependências:
+   $ flutter pub get
+
+   - Inicie o app: 
+   $ flutter run
+   ```
 
 
 ---
