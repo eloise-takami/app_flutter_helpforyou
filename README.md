@@ -35,7 +35,7 @@ O Help for you é um aplicativo mobile que visa influenciar e auxiliar mulheres,
 
    ```
    - Clone esse repositório:
-   $ git clone https://github.com/rocketseat-education/nlw-06-flutter
+   $ git clone https://github.com/eloise-takami/app_flutter_helpforyou
 
    - Entre no diretório:
    $ cd app_flutter_helpforyou/helpforyou
