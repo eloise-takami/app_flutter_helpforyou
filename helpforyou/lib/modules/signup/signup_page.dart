@@ -169,35 +169,6 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                   ),
-                  // child: FlatButton(
-                  //   onPressed: () async {
-                  //     bool isValid = await AuthService.signUp(
-                  //       context,
-                  //       _name,
-                  //       _email,
-                  //       _password,
-                  //       _rg,
-                  //     );
-                  //     if (isValid) {
-                  //       Navigator.pushAndRemoveUntil(
-                  //         context,
-                  //         MaterialPageRoute(builder: (context) => Home()),
-                  //         (route) => false,
-                  //       );
-                  //       // Navigator.pop(context);
-                  //     } else {
-                  //       print("erro cadastro");
-                  //     }
-                  //   },
-                  //   child: Text(
-                  //     "                    Sign up",
-                  //     style: TextStyle(
-                  //       fontWeight: FontWeight.bold,
-                  //       color: Colors.white,
-                  //       fontSize: 20,
-                  //     ),
-                  //   ),
-                  // ),
                 ),
               ),
             ],

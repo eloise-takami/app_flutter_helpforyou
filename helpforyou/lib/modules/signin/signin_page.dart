@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:helpforyou/app_routes.dart';
 import 'package:helpforyou/services/auth/auth_service.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
-
-import '../signup/signup_page.dart';
-import '../app/app_page.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({Key? key}) : super(key: key);
@@ -155,10 +153,13 @@ class _SigninPageState extends State<SigninPage> {
                     bool isValid = await AuthService.login(_email!, _password);
                     if (isValid) {
                       print("conectado");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AppPage()),
-                      );
+
+                      Navigator.pushNamed(context, AppRoutes.app);
+
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => AppPage()),
+                      // );
                     } else {
                       print('login problem');
                     }
@@ -185,11 +186,13 @@ class _SigninPageState extends State<SigninPage> {
                     style: TextStyle(fontSize: 15),
                   ),
                   color: Colors.grey,
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignupPage()),
-                    ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.signup);
+
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => SignupPage()),
+                    // ),
                   },
                 ),
               ),

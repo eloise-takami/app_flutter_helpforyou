@@ -62,6 +62,6 @@ class _AppPageState extends State<AppPage> {
   Widget _iconNavigatorMenu(IconData iconData) => Icon(
         iconData,
         size: 30,
-        //color: AppColors.roxo,
+        color: AppColors.roxo,
       );
 }

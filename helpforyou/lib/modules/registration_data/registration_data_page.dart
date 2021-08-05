@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/app_routes.dart';
 import 'package:helpforyou/services/auth/auth_service.dart';
 import 'package:helpforyou/shared/models/user_model.dart';
 import 'package:helpforyou/shared/providers/auth_state.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
 import 'package:provider/provider.dart';
-
-import '../signin/signin_page.dart';
 
 class RegistrationDataPage extends StatefulWidget {
   const RegistrationDataPage({Key? key}) : super(key: key);
@@ -222,11 +221,17 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
         onPressed: () async {
           final response = await AuthService.logout();
           if (response) {
-            Navigator.pushAndRemoveUntil(
+            Navigator.pushNamedAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => SigninPage()),
+              AppRoutes.signin,
               (route) => false,
             );
+
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => SigninPage()),
+            //   (route) => false,
+            // );
           }
         },
       ),

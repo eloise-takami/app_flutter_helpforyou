@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/app_routes.dart';
 import 'package:helpforyou/shared/widgets/my_clipper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -129,18 +130,13 @@ class _HomePageState extends State<HomePage> {
                       GestureDetector(
                         onTap: () {
                           print("botao gravador de voz");
+
+                          Navigator.pushNamed(context, AppRoutes.audio_record);
+
                           // Navigator.push(
                           //   context,
                           //   MaterialPageRoute(
-                          //     builder: (context) =>
-                          //         RecorderExample(), // PageAudioRecorder(),
-
-                          //     // RipplesAnimation(
-                          //     //   size: 80.0,
-                          //     //   color: AppColors.roxo,
-                          //     //   onPressed: () {},
-                          //     //   child: Container(),
-                          //     // ),
+                          //     builder: (context) => AudioRecordPage(),
                           //   ),
                           // );
                         },
