@@ -82,7 +82,7 @@ class DatabaseService {
         ),
       );
     } else {
-      return ResponseBuilder.failed(message: 'Falha ao acessar dados');
+      return ResponseBuilder.failed(message: 'Falha ao acessar dadoss');
     }
   }
 }
