@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpforyou/app_routes.dart';
+import 'package:helpforyou/modules/chat/chat_page.dart';
+import 'package:helpforyou/modules/home/home_page.dart';
 import 'package:helpforyou/services/auth/auth_service.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
@@ -155,12 +157,10 @@ class _SigninPageState extends State<SigninPage> {
                     if (isValid) {
                       print("conectado");
 
-                      Navigator.pushNamed(context, AppRoutes.app);
-
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => AppPage()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
                     } else {
                       print('login problem');
                     }
