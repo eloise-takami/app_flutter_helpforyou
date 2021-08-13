@@ -66,7 +66,7 @@ class _SignupPageState extends State<SignupPage> {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/borda2.png'),
+            image: AssetImage("assets/images/h_sembranco.png"),
             fit: BoxFit.fill,
           ),
         ),

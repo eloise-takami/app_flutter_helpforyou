@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpforyou/app_routes.dart';
 import 'package:helpforyou/services/auth/auth_service.dart';
+import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
 
 class SigninPage extends StatefulWidget {
@@ -100,7 +101,7 @@ class _SigninPageState extends State<SigninPage> {
                       color: Color.fromRGBO(63, 71, 206, 1.0),
                     ),
                   ),
-                  labelText: "Password"),
+                  labelText: "Senha"),
             ),
             //_montarTextField("Senha", true,Icon(Icons.lock, color: Color.fromRGBO(63, 71, 206, 1.0))),
 
@@ -109,11 +110,11 @@ class _SigninPageState extends State<SigninPage> {
               alignment: Alignment.centerRight,
               child: FlatButton(
                 child: Text(
-                  "Forgot password?",
+                  "Esqueceu a senha?",
                   textAlign: TextAlign.right,
                 ),
                 onPressed: () {
-                  print(" boatao Forgot password");
+                  print(" botao Forgot password");
                 },
               ),
             ),
@@ -142,7 +143,7 @@ class _SigninPageState extends State<SigninPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      _montarTextoBotao("                      Login"),
+                      _montarTextoBotao("                      Entrar"),
                     ],
                   ),
                   onPressed: () async {
@@ -168,11 +169,11 @@ class _SigninPageState extends State<SigninPage> {
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 10,
             ),
             Container(
               height: 40,
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.topRight,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(
                   Radius.circular(30),
@@ -181,11 +182,13 @@ class _SigninPageState extends State<SigninPage> {
               child: SizedBox.expand(
                 child: FlatButton(
                   child: Text(
-                    "Register",
+                    "Não tem uma conta?",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.roxo),
                   ),
-                  color: Colors.grey,
                   onPressed: () {
                     Navigator.pushNamed(context, AppRoutes.signup);
 
