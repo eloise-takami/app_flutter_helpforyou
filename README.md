@@ -50,4 +50,4 @@ O Help for you é um aplicativo mobile que visa influenciar e auxiliar mulheres,
 
 ---
 
-Feito com ♥ by Eloise  e Ana 
+Feito com ♥ by Eloise 
