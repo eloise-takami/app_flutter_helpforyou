@@ -15,21 +15,21 @@ class ChatModel {
   static List<ChatModel> list = [
     ChatModel(
       isTyping: true,
-      lastMessage: "hello!",
+      lastMessage: "ooi, como vai? queria te pedir aju...",
       lastMessageTime: DateTime.now(),
-      contact: ContactModel(name: " Psicólogo"),
+      contact: ContactModel(name: " Maria Fernanda"),
     ),
     ChatModel(
       isTyping: false,
-      lastMessage: "Sure, no problem Jhon!",
+      lastMessage: "Sem problemas",
       lastMessageTime: DateTime.now(),
-      contact: ContactModel(name: "Psicólogo"),
+      contact: ContactModel(name: "João Carlos"),
     ),
     ChatModel(
       isTyping: false,
-      lastMessage: "thank you Jhon!",
+      lastMessage: "Mto obggg!",
       lastMessageTime: DateTime.now(),
-      contact: ContactModel(name: "Psicólogo"),
+      contact: ContactModel(name: "Gabriel Silva"),
     ),
   ];
 }

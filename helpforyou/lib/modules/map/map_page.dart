@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -58,9 +59,27 @@ class _MapPageState extends State<MapPage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
-          title: Image(
-            image: AssetImage(Imagem.logo_h),
-            width: 35.0,
+          title: Container(
+            // margin: EdgeInsets.all(16),
+            //padding: EdgeInsets.all(6),
+            decoration: BoxDecoration(
+                color: AppColors.branco,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                )),
+            child: TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: AppColors.roxo,
+                ),
+                hintText: " Procurar Ponto de Apoio mais próximo",
+                hintStyle: TextStyle(
+                  color: AppColors.roxo,
+                ),
+              ),
+            ),
           ),
           //Text("Encontre uma delegacia próxima de você:"),
         ),
@@ -93,27 +112,39 @@ class _MapPageState extends State<MapPage> {
                             context: context,
                             builder: (builder) {
                               return Container(
-                                color: Colors.white,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(100),
+                                  ),
+                                  // boxShadow: [
+                                  //   new BoxShadow(
+                                  //     color: Colors.grey,
+                                  //     blurRadius: 20,
+                                  //   ),
+                                  // ],
+                                ),
                                 child: Column(
                                   children: [
                                     Container(
-                                        color: Color.fromRGBO(62, 71, 208, 1.0),
-                                        height: 90,
-                                        width: double.infinity,
-                                        child: Center(
-                                          child: Text(
-                                            "Delegacia da polícia de Paulínia",
-                                            style: GoogleFonts.breeSerif(
-                                              textStyle: Theme.of(context)
-                                                  .textTheme
-                                                  .headline4,
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.w900,
-                                              fontStyle: FontStyle.normal,
-                                              color: Colors.white,
-                                            ),
+                                      color: Color.fromRGBO(62, 71, 208, 1.0),
+                                      height: 90,
+                                      width: double.infinity,
+                                      child: Center(
+                                        child: Text(
+                                          "Delegacia da polícia de Paulínia",
+                                          style: GoogleFonts.breeSerif(
+                                            textStyle: Theme.of(context)
+                                                .textTheme
+                                                .headline4,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w900,
+                                            fontStyle: FontStyle.normal,
+                                            color: Colors.white,
                                           ),
-                                        )),
+                                        ),
+                                      ),
+                                    ),
+
                                     Row(
                                       children: [
                                         Container(

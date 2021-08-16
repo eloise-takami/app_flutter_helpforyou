@@ -43,7 +43,7 @@ class _PageMensagemState extends State<PageMensagem> {
                   Icons.search,
                   color: AppColors.roxo,
                 ),
-                hintText: " Procurar",
+                hintText: " Procurar Psicólogo",
                 hintStyle: TextStyle(
                   color: AppColors.roxo,
                 ),
@@ -51,56 +51,57 @@ class _PageMensagemState extends State<PageMensagem> {
             ),
           ),
           Expanded(
-              child: ListView.builder(
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => ChatPage(),
-                          ),
-                        );
-                      },
-                      leading: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100)),
-                            image: DecorationImage(
-                              image: ExactAssetImage(Imagem.medico),
-                            )),
+            child: ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => ChatPage(),
                       ),
-                      title: Text(
-                        list[index].contact.name,
+                    );
+                  },
+                  leading: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
+                        image: DecorationImage(
+                          image: ExactAssetImage(Imagem.medico),
+                        )),
+                  ),
+                  title: Text(
+                    list[index].contact.name,
+                    style: TextStyle(
+                      color: AppColors.roxo,
+                    ),
+                  ),
+                  subtitle: Row(
+                    children: <Widget>[
+                      Text(
+                        list[index].lastMessage,
                         style: TextStyle(
                           color: AppColors.roxo,
                         ),
                       ),
-                      subtitle: Row(
-                        children: <Widget>[
-                          Text(
-                            list[index].lastMessage,
-                            style: TextStyle(
-                              color: AppColors.roxo,
-                            ),
-                          ),
-                          SizedBox(width: 25),
-                          // Text(
-                          //   list[index].lastMessageTime + "ias atrás",
-                          //   style: TextStyle(
-                          //     color: AppColors.roxo,
-                          //   ),
-                          // ),
-                          // Text(ChatModel.list[index].lastMessageTime,
-                          // style: TextStyle(
-                          //      color: AppColors.roxo,
-                          //    ),)
-                        ],
-                      ),
-                    );
-                  }))
+                      SizedBox(width: 25),
+                      // Text(
+                      //   list[index].lastMessageTime + "ias atrás",
+                      //   style: TextStyle(
+                      //     color: AppColors.roxo,
+                      //   ),
+                      // ),
+                      // Text(ChatModel.list[index].lastMessageTime,
+                      // style: TextStyle(
+                      //      color: AppColors.roxo,
+                      //    ),)
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
