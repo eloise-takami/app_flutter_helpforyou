@@ -157,10 +157,7 @@ class _SigninPageState extends State<SigninPage> {
                     if (isValid) {
                       print("conectado");
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      );
+                      Navigator.pushReplacementNamed(context, AppRoutes.app);
                     } else {
                       print('login problem');
                     }
