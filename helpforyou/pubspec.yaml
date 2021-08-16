@@ -48,10 +48,16 @@ dependencies:
   provider: ^5.0.0
   url_launcher: ^6.0.9
   flutter_sms: ^2.3.1
+  flutter_launcher_icons: ^0.9.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  image_path: "assets/images/h_sembranco.png"
+  android: true
+  ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
