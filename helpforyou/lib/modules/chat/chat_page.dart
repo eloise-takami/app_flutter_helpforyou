@@ -151,13 +151,34 @@ class ItemMessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.green,
+      padding: EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+      child: Align(
+        alignment:
+            (chat.sentByPsychologist ? Alignment.topLeft : Alignment.topRight),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: (chat.sentByPsychologist
+                ? Colors.grey.shade200
+                : Colors.blue[200]),
+          ),
+          padding: EdgeInsets.all(16),
+          child: Text(
+            chat.content,
+            style: TextStyle(fontSize: 15),
+          ),
+        ),
       ),
-      alignment: Alignment.center,
-      child: Text(chat.content),
     );
+
+    // return Container(
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.circular(8),
+    //     color: Colors.green,
+    //   ),
+    //   alignment: Alignment.center,
+    //   child: Text(chat.content),
+    // );
   }
 }
 
