@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helpforyou/app_routes.dart';
 import 'package:helpforyou/services/auth/auth_service.dart';
 import 'package:helpforyou/services/database/database_service.dart';
 import 'package:helpforyou/shared/models/user_model.dart';
@@ -45,6 +46,7 @@ class _SignupPageState extends State<SignupPage> {
       Provider.of<AuthState>(context, listen: false).setUser(user);
 
       await DatabaseService.saveSignUpData(user);
+      Navigator.pushReplacementNamed(context, AppRoutes.signin);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -66,7 +68,7 @@ class _SignupPageState extends State<SignupPage> {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/borda2.png"),
+            image: AssetImage(Imagem.borda),
             fit: BoxFit.fill,
           ),
         ),
@@ -81,7 +83,7 @@ class _SignupPageState extends State<SignupPage> {
               SizedBox(
                 width: 100,
                 height: 100,
-                child: Text(Imagem.logo_h),
+                child: Image.asset(Imagem.logo_h),
               ),
               SizedBox(
                 height: 20,
