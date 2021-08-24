@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void fazerLigacao() async {
+  fazerLigacao() async {
     const url = "tel:190";
     if (await canLaunch(url)) {
       await launch(url);
@@ -84,8 +84,12 @@ class _HomePageState extends State<HomePage> {
                       GestureDetector(
                         onTap: () {
                           print("botao policia");
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: fazerLigacao()));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: fazerLigacao(),
+                            ),
+                          );
                         },
                         child: Container(
                           height: 102.5,
