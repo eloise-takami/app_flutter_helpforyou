@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helpforyou/app_routes.dart';
-import 'package:helpforyou/modules/chat/chat_page.dart';
-import 'package:helpforyou/modules/home/home_page.dart';
+import 'package:helpforyou/modules/signup/signup_page.dart';
 import 'package:helpforyou/services/auth/auth_service.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
@@ -149,14 +148,11 @@ class _SigninPageState extends State<SigninPage> {
                     ],
                   ),
                   onPressed: () async {
-                    print("botao login");
                     _email = emailController.text;
                     _password = passController.text;
-                    print("$_password");
                     bool isValid = await AuthService.login(_email!, _password);
                     if (isValid) {
                       print("conectado");
-
                       Navigator.pushReplacementNamed(context, AppRoutes.app);
                     } else {
                       print('login problem');
@@ -187,12 +183,17 @@ class _SigninPageState extends State<SigninPage> {
                         color: AppColors.roxo),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.signup);
-
+                    WidgetsBinding.instance!.addPostFrameCallback((_) {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignupPage(),
+                          ));
+                    });
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(builder: (context) => SignupPage()),
-                    // ),
+                    // );
                   },
                 ),
               ),
