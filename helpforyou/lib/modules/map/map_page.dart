@@ -117,6 +117,7 @@ class _MapPageState extends State<MapPage> {
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(100),
                                   ),
+
                                   // boxShadow: [
                                   //   new BoxShadow(
                                   //     color: Colors.grey,
@@ -149,9 +150,15 @@ class _MapPageState extends State<MapPage> {
                                     Row(
                                       children: [
                                         Container(
-                                          color: Colors.white,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(50),
+                                              topRight: Radius.circular(50),
+                                            ),
+                                          ),
                                           height: 70,
-                                          width: 10,
+                                          width: 20,
                                           child: Icon(
                                             Icons.phone,
                                             color: Color.fromRGBO(
