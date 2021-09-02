@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:helpforyou/services/database/database_service.dart';
 import 'package:helpforyou/shared/models/psychologist_model.dart';
 import 'chat_page.dart';
@@ -55,13 +56,59 @@ class _ChatsPageState extends State<ChatsPage> {
               future: DatabaseService.psychologists(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Center(child: Text('Erro ao carregar psicólogos.'));
+                  return Scaffold(
+                    body: Container(
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            'Ops, algo deu errado ao procurar psicólogos :(',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.breeSerif(
+                              textStyle: Theme.of(context).textTheme.headline4,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
+                              fontStyle: FontStyle.normal,
+                              color: AppColors.roxo,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: Image.asset(Imagem.erro),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
                 }
 
                 if (snapshot.hasData) {
                   if (snapshot.data!.isEmpty) {
-                    return Center(
-                      child: Text('Não há psicólogos cadastrados.'),
+                    return Scaffold(
+                      body: Container(
+                        width: double.infinity,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              'Ops, não há psicólogos cadastrados :(',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.breeSerif(
+                                textStyle:
+                                    Theme.of(context).textTheme.headline4,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                                fontStyle: FontStyle.normal,
+                                color: AppColors.roxo,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 100,
+                              height: 100,
+                              //child: Image.asset(Imagem.firebase_vazio),
+                            ),
+                          ],
+                        ),
+                      ),
                     );
                   } else {
                     final psychologists = snapshot.data!;
