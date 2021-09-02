@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:helpforyou/modules/chat/chat_controller.dart';
 import 'package:helpforyou/services/database/database_service.dart';
 import 'package:helpforyou/shared/models/chat_model.dart';
 import 'package:helpforyou/shared/models/psychologist_model.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
+import 'package:helpforyou/shared/themes/app_images.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key, required this.psychologist}) : super(key: key);
@@ -76,8 +78,46 @@ class _ChatPageState extends State<ChatPage> {
 
                 if (snapshot.hasData) {
                   if (snapshot.data!.docs.isEmpty) {
-                    return Center(
-                      child: Text('Não há mensagens para mostrar.'),
+                    return Scaffold(
+                      backgroundColor: AppColors.azulClaro,
+                      body: Container(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 70,
+                              ),
+                              Center(
+                                child: Text(
+                                  "Mande um 'oi, podemos conversar?'",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.breeSerif(
+                                    textStyle:
+                                        Theme.of(context).textTheme.headline4,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w900,
+                                    fontStyle: FontStyle.normal,
+                                    color: AppColors.roxo,
+                                  ),
+                                ),
+                              ),
+                              Center(
+                                child: Text(
+                                  'Pode enviar mensagens a este psicólogo, ele está a sua disposição ;)',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 400,
+                                child: Image.asset(
+                                  Imagem.firebase_vazio,
+                                  height: 450,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     );
                   } else {
                     final messages = snapshot.data!.docs
