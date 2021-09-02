@@ -13,7 +13,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pelas mulheres',
+      title: 'Hey! volte para o Help for you :)',
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
         primarySwatch: Colors.indigo,
