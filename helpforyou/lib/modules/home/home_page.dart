@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:helpforyou/app_routes.dart';
 import 'package:helpforyou/shared/widgets/my_clipper.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'contatos.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,16 +13,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  fazerLigacao() async {
-    const url = "tel:190";
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+  launchApp(String url, BuildContext context) async {
+    await canLaunch(url)
+        ? await launch(url)
+        : showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Alerta!'),
+                content: Text('Não foi possivel acessar seus contatos.'),
+              );
+            },
+          );
   }
 
-  List<String> recipents = ["997853422", "9976257644"];
+  List<String> recipents = [];
 
   @override
   Widget build(BuildContext context) {
@@ -86,9 +92,7 @@ class _HomePageState extends State<HomePage> {
                           print("botao policia");
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: fazerLigacao(),
-                            ),
+                            launchApp("tel:190", context),
                           );
                         },
                         child: Container(
@@ -295,7 +299,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            print("botao adicionar");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Contatos()),
+                            );
                           },
                           child: Center(
                             child: Container(
