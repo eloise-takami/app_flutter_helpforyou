@@ -13,18 +13,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  launchApp(String url, BuildContext context) async {
-    await canLaunch(url)
-        ? await launch(url)
-        : showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('Alerta!'),
-                content: Text('Não foi possivel acessar seus contatos.'),
-              );
-            },
-          );
+  // launchApp(String url, BuildContext context) async {
+  //   await canLaunch(url)
+  //       ? await launch(url)
+  //       : showDialog(
+  //           context: context,
+  //           builder: (BuildContext context) {
+  //             return AlertDialog(
+  //               title: Text('Alerta!'),
+  //               content: Text('Não foi possivel acessar seus contatos.'),
+  //             );
+  //           },
+  //         );
+  // }
+
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Não foi possível acessar seus contatos."),
+        ),
+      );
+    }
   }
 
   List<String> recipents = [];
@@ -90,10 +102,7 @@ class _HomePageState extends State<HomePage> {
                       GestureDetector(
                         onTap: () {
                           print("botao policia");
-                          Navigator.push(
-                            context,
-                            launchApp("tel:190", context),
-                          );
+                          _makePhoneCall("tel:190");
                         },
                         child: Container(
                           height: 102.5,
