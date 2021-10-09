@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/shared/models/post_model.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
-import 'package:helpforyou/shared/themes/app_images.dart';
 
 class NewPostPage extends StatefulWidget {
   const NewPostPage({Key? key}) : super(key: key);
@@ -11,6 +13,23 @@ class NewPostPage extends StatefulWidget {
 }
 
 class _NewPostPageState extends State<NewPostPage> {
+  var LoginUser = FirebaseAuth.instance.currentUser;
+
+  TextEditingController content = TextEditingController();
+
+  Future<void> insertData(final post) async {
+    final firestore = FirebaseFirestore.instance;
+
+    firestore
+        .collection("relatos")
+        .add(post)
+        .then((DocumentReference document) {
+      print(document.id);
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
   String? _relato;
   String? valueChoose;
   final listItem = <String>[
@@ -20,6 +39,7 @@ class _NewPostPageState extends State<NewPostPage> {
     "Violência moral",
     "Violência psicológica"
   ];
+  bool container = false;
 
   @override
   Widget build(BuildContext context) {
@@ -102,15 +122,13 @@ class _NewPostPageState extends State<NewPostPage> {
                     Container(
                       width: 300,
                       child: TextField(
-                        maxLength: 200,
+                        controller: content,
+                        maxLength: 1000,
                         maxLines: 7,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Digite seu relato',
                         ),
-                        onChanged: (value) {
-                          _relato = value;
-                        },
                       ),
                     ),
                     SizedBox(
@@ -154,10 +172,14 @@ class _NewPostPageState extends State<NewPostPage> {
                             ],
                           ),
                           onPressed: () {
-                            //Navigator.push(
-                            //context,
-                            //MaterialPageRoute(builder: (context) => PagePessoa()),
-                            //);
+                            final String pcontent = content.text;
+
+                            final PostModel post = PostModel(content: pcontent);
+
+                            insertData(post.toMap());
+                            content.clear();
+
+                            Navigator.of(context).pop();
                           },
                         ),
                       ),
