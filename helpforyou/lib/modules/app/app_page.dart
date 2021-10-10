@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:helpforyou/modules/chat/chat_page.dart';
+import 'package:helpforyou/modules/chat/chats_page.dart';
 import 'package:helpforyou/modules/feed/feed_page.dart';
 import 'package:helpforyou/modules/home/home_page.dart';
 import 'package:helpforyou/modules/map/map_page.dart';
@@ -20,7 +20,7 @@ class _AppPageState extends State<AppPage> {
     RegistrationDataPage(),
     HomePage(),
     MapPage(),
-    ChatPage(),
+    ChatsPage(),
   ];
 
   int _pageIndex = 0;

@@ -1,5 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/shared/models/post_model.dart';
+import 'package:helpforyou/shared/themes/app_colors.dart';
+
+import 'new_post_controller.dart';
 
 class NewPostPage extends StatefulWidget {
   const NewPostPage({Key? key}) : super(key: key);
@@ -9,136 +15,168 @@ class NewPostPage extends StatefulWidget {
 }
 
 class _NewPostPageState extends State<NewPostPage> {
-  String? _relato;
-  String? valueChoose;
-  final listItem = <String>[
-    "Violência sexual",
-    "Violência patrimonial",
-    "Violência fisica",
-    "Violência moral",
-    "Violência psicológica"
-  ];
+  final controller = NewPostController();
+  bool isLoading = false;
+
+  void postar() async {
+    if (controller.valueChoose == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          new SnackBar(content: const Text('Escolha uma categoria')));
+    } else if (controller.content.text.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(new SnackBar(content: const Text('Qual seu relato?')));
+    } else {
+      setState(() {
+        isLoading = true;
+      });
+
+      final result = await controller.postar(context);
+
+      setState(() {
+        isLoading = false;
+      });
+
+      if (result) {
+        Navigator.of(context).pop();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(''),
-        backgroundColor: Color.fromRGBO(62, 71, 208, 1.0),
+        elevation: 0,
+        backgroundColor: AppColors.roxo,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Container(
-                  padding: EdgeInsets.only(left: 1, right: 2),
-                  decoration: new BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: DropdownButton<String>(
-                    hint: Text(
-                      " onde se aproxima esse relato",
-                      style: GoogleFonts.breeSerif(
-                        textStyle: Theme.of(context).textTheme.headline4,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w900,
-                        fontStyle: FontStyle.normal,
-                        color: Color.fromRGBO(62, 71, 208, 1.0),
-                      ),
-                    ),
-                    dropdownColor: Colors.white,
-                    icon: Icon(Icons.arrow_drop_down,
-                        color: Color.fromRGBO(62, 71, 208, 1.0)),
-                    iconSize: 30,
-                    style: GoogleFonts.breeSerif(
-                      textStyle: Theme.of(context).textTheme.headline4,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w900,
-                      fontStyle: FontStyle.normal,
-                      color: Color.fromRGBO(62, 71, 208, 1.0),
-                    ),
-                    value: valueChoose,
-                    onChanged: (newValue) {
-                      setState(() {
-                        valueChoose = newValue;
-                      });
-                    },
-                    items: listItem.map((valueItem) {
-                      return DropdownMenuItem(
-                        value: valueItem,
-                        child: Text(valueItem),
-                      );
-                    }).toList(),
-                  ),
-                ),
+      body: Stack(
+        children: [
+          Container(color: AppColors.roxo),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: AppColors.branco,
+              borderRadius: BorderRadius.only(
+                topLeft: const Radius.circular(70),
               ),
             ),
-            SizedBox(height: 20),
-            TextField(
-              maxLength: 200,
-              maxLines: 7,
-              decoration: InputDecoration(
-                hintText: 'Digite seu relato',
-              ),
-              onChanged: (value) {
-                _relato = value;
-              },
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Container(
-              height: 60,
-              width: 230,
-              alignment: Alignment.centerLeft,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: [0.2, 1],
-                  colors: [
-                    Colors.cyan[700]!,
-                    Color.fromRGBO(62, 71, 208, 1.0),
-                  ],
-                ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(30),
-                ),
-              ),
-              child: SizedBox.expand(
-                child: FlatButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "                Postar",
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Center(
+                  child: Container(
+                    width: 140,
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        hint: Text(
+                          "Categoria",
+                          style: GoogleFonts.breeSerif(
+                            textStyle: Theme.of(context).textTheme.headline4,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900,
+                            fontStyle: FontStyle.normal,
+                            color: Color.fromRGBO(62, 71, 208, 1.0),
+                          ),
+                        ),
+                        dropdownColor: Colors.white,
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: Color.fromRGBO(62, 71, 208, 1.0),
+                        ),
+                        iconSize: 30,
                         style: GoogleFonts.breeSerif(
                           textStyle: Theme.of(context).textTheme.headline4,
-                          fontSize: 20,
+                          fontSize: 16,
                           fontWeight: FontWeight.w900,
                           fontStyle: FontStyle.normal,
-                          color: Colors.white,
+                          color: Color.fromRGBO(62, 71, 208, 1.0),
                         ),
-                        textAlign: TextAlign.center,
+                        value: controller.valueChoose,
+                        onChanged: (newValue) {
+                          setState(() {
+                            controller.valueChoose = newValue;
+                          });
+                        },
+                        items: controller.categorias.map((valueItem) {
+                          return DropdownMenuItem(
+                            value: valueItem,
+                            child: Text(valueItem),
+                          );
+                        }).toList(),
                       ),
-                    ],
+                    ),
                   ),
-                  onPressed: () {
-                    //Navigator.push(
-                    //context,
-                    //MaterialPageRoute(builder: (context) => PagePessoa()),
-                    //);
-                  },
                 ),
-              ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: TextField(
+                            controller: controller.content,
+                            maxLength: 1000,
+                            maxLines: 15,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Digite seu relato',
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            height: 54,
+                            width: 150,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  stops: [0.2, 1],
+                                  colors: [
+                                    Colors.cyan[700]!,
+                                    Color.fromRGBO(62, 71, 208, 1.0),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(30)),
+                            child: TextButton(
+                              onPressed: postar,
+                              style: TextButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                              child: Text(
+                                "Postar",
+                                style: GoogleFonts.breeSerif(
+                                  textStyle:
+                                      Theme.of(context).textTheme.headline4,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w900,
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          if (isLoading)
+            Container(
+              color: Colors.black54,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+        ],
       ),
     );
   }

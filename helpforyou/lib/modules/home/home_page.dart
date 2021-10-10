@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helpforyou/app_routes.dart';
+import 'package:helpforyou/modules/home/imagem.dart';
+import 'package:helpforyou/modules/home/contatos/vercontato.dart';
+import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'package:helpforyou/shared/widgets/my_clipper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,19 +15,59 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void fazerLigacao() async {
-    const url = "tel:190";
+  launchApp(String url, BuildContext context) async {
+    await canLaunch(url)
+        ? await launch(url)
+        : showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Alerta!'),
+                content: Text('Não foi possivel um app compativel.'),
+              );
+            },
+          );
+  }
+  // launchApp(String url, BuildContext context) async {
+  //   await canLaunch(url)
+  //       ? await launch(url)
+  //       : showDialog(
+  //           context: context,
+  //           builder: (BuildContext context) {
+  //             return AlertDialog(
+  //               title: Text('Alerta!'),
+  //               content: Text('Não foi possivel acessar seus contatos.'),
+  //             );
+  //           },
+  //         );
+  // }
+
+  Future<void> _makePhoneCall(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch $url';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Não foi possível acessar seus contatos."),
+        ),
+      );
     }
   }
-
-  List<String> recipents = ["997853422", "9976257644"];
+  // Future<void> _makePhoneCall(String url) async {
+  //   if (await canLaunch(url)) {
+  //     await launch(url);
+  //   } else {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text("Não foi possível acessar seus contatos."),
+  //       ),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.cyan[50],
       body: Column(
@@ -53,15 +96,17 @@ class _HomePageState extends State<HomePage> {
                   //Positioned(
                   // top: 100,
                   //left: 300,
-                  Text(
-                    "     Corra, abra e \n     reporte!",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.breeSerif(
-                      textStyle: Theme.of(context).textTheme.headline4,
-                      fontSize: 48,
-                      fontWeight: FontWeight.w900,
-                      fontStyle: FontStyle.normal,
-                      color: Colors.white,
+                  Center(
+                    child: Text(
+                      "Corra, abra e\nreporte!",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.breeSerif(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 48,
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.normal,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   // ),
@@ -72,177 +117,308 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.cyan[50],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          print("botao policia");
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: fazerLigacao()));
-                        },
-                        child: Container(
-                          height: 102.5,
-                          width: 102.5,
-                          decoration: new BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 3),
-                                blurRadius: 10,
-                                color: Color.fromRGBO(62, 71, 208, 1.0),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.phone,
-                                color: Color.fromRGBO(62, 71, 208, 1.0),
-                                size: 50,
-                              ),
-                              SizedBox(height: 1),
-                              Text(
-                                ' Ligar para \n     policia',
-                                style: GoogleFonts.breeSerif(
-                                    textStyle:
-                                        Theme.of(context).textTheme.headline4,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w900,
-                                    fontStyle: FontStyle.normal,
-                                    color: Colors.black),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                        width: 20,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          print("botao gravador de voz");
-
-                          Navigator.pushNamed(context, AppRoutes.audio_record);
-
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => AudioRecordPage(),
-                          //   ),
-                          // );
-                        },
-                        child: Container(
-                          height: 102.5,
-                          width: 102.5,
-                          decoration: new BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 3),
-                                blurRadius: 10,
-                                color: Color.fromRGBO(62, 71, 208, 1.0),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.keyboard_voice,
-                                color: Color.fromRGBO(62, 71, 208, 1.0),
-                                size: 50,
-                              ),
-                              SizedBox(height: 1),
-                              Text(
-                                ' Gravador de \n          voz ',
-                                style: GoogleFonts.breeSerif(
-                                  textStyle:
-                                      Theme.of(context).textTheme.headline4,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w900,
-                                  fontStyle: FontStyle.normal,
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(
+                        top: 20, left: 10, right: 10, bottom: 20),
+                    child: Row(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            print("botao policia");
+                            launchApp("tel:190", context);
+                          },
+                          child: Container(
+                            height: 93,
+                            width: 93,
+                            decoration: new BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 3),
+                                  blurRadius: 10,
                                   color: Colors.black,
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.phone,
+                                  color: Color.fromRGBO(62, 71, 208, 1.0),
+                                  size: 50,
+                                ),
+                                SizedBox(height: 1),
+                                Text(
+                                  ' Ligar para \n     policia',
+                                  style: GoogleFonts.breeSerif(
+                                      textStyle:
+                                          Theme.of(context).textTheme.headline4,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w900,
+                                      fontStyle: FontStyle.normal,
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                        width: 20,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          print("botao reporte");
-                          //   _sendSMS(
-                          //       "Help for you: A usuária _ mandou um pedido de socorro. Entre em contato. ",
-                          //       recipents);
-                        },
-                        child: Container(
-                          height: 102.5,
-                          width: 102.5,
-                          decoration: new BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 3),
-                                blurRadius: 10,
-                                color: Color.fromRGBO(62, 71, 208, 1.0),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.report_problem,
-                                color: Color.fromRGBO(62, 71, 208, 1.0),
-                                size: 50,
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                'Reporte',
-                                style: GoogleFonts.breeSerif(
+                        SizedBox(
+                          height: 20,
+                          width: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            print("botao gravador de voz");
+
+                            Navigator.pushNamed(
+                                context, AppRoutes.audio_record);
+
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => AudioRecordPage(),
+                            //   ),
+                            // );
+                          },
+                          child: Container(
+                            height: 93,
+                            width: 93,
+                            decoration: new BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 3),
+                                  blurRadius: 10,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.keyboard_voice,
+                                  color: Color.fromRGBO(62, 71, 208, 1.0),
+                                  size: 50,
+                                ),
+                                SizedBox(height: 1),
+                                Text(
+                                  ' Gravador de \n          voz ',
+                                  style: GoogleFonts.breeSerif(
                                     textStyle:
                                         Theme.of(context).textTheme.headline4,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w900,
                                     fontStyle: FontStyle.normal,
-                                    color: Colors.black),
-                              ),
-                            ],
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 20,
+                          width: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            print("botao reporte");
+                            //_sendSMS(
+                            //"Help for you: A usuária _ mandou um pedido de socorro. Entre em contato. ",
+                            //recipents);
+                            //launchApp("sms:19991731950?body=Estou em perigo!", context);
+
+                            launchApp(
+                                "sms:19991731950?body=Estou em perigo!preciso de ajuda, segue a minha localização:http://maps.google.com/maps?q=-22.7998%2C-47.14602",
+                                context);
+                            showDialog(
+                                context: context,
+                                barrierDismissible: true,
+                                builder: (BuildContext ctx) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(15)),
+                                    ),
+                                    title:
+                                        Text("Mensagem enviada com sucesso!"),
+                                    actions: <Widget>[
+                                      RaisedButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(15)),
+                                        ),
+                                        color: AppColors.roxo,
+                                        child: Text(
+                                          "OK",
+                                          style: TextStyle(
+                                              color: AppColors.branco),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(ctx).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                          child: Container(
+                            height: 93,
+                            width: 93,
+                            decoration: new BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 3),
+                                  blurRadius: 10,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.report_problem,
+                                  color: Color.fromRGBO(62, 71, 208, 1.0),
+                                  size: 50,
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  'Reporte',
+                                  style: GoogleFonts.breeSerif(
+                                      textStyle:
+                                          Theme.of(context).textTheme.headline4,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w900,
+                                      fontStyle: FontStyle.normal,
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                          width: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            print('foto');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Imagem()),
+                            );
+                          },
+                          child: Container(
+                            height: 93,
+                            width: 93,
+                            decoration: new BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 3),
+                                  blurRadius: 10,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.photo,
+                                  color: Color.fromRGBO(62, 71, 208, 1.0),
+                                  size: 50,
+                                ),
+                                SizedBox(height: 1),
+                                Text(
+                                  ' Baixe fotos \n       aqui!',
+                                  style: GoogleFonts.breeSerif(
+                                      textStyle:
+                                          Theme.of(context).textTheme.headline4,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w900,
+                                      fontStyle: FontStyle.normal,
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                          width: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            print("botao central de atendimento a mulher");
+                            //Navigator.push(context,
+                            //MaterialPageRoute(builder: fazerLigacao()));
+                            launchApp("tel:180", context);
+                          },
+                          child: Container(
+                            height: 93,
+                            width: 93,
+                            decoration: new BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 3),
+                                  blurRadius: 10,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.phone,
+                                  color: Color.fromRGBO(62, 71, 208, 1.0),
+                                  size: 50,
+                                ),
+                                SizedBox(height: 1),
+                                Text(
+                                  ' Ligar para \n         180',
+                                  style: GoogleFonts.breeSerif(
+                                      textStyle:
+                                          Theme.of(context).textTheme.headline4,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w900,
+                                      fontStyle: FontStyle.normal,
+                                      color: Colors.black),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 5),
                   Text(
-                    "    *Só ligue para a polícia em caso de extrema emergência! ",
+                    "       *Só ligue para a polícia em caso de extrema emergência! ",
                     style: GoogleFonts.breeSerif(
                       textStyle: Theme.of(context).textTheme.headline4,
-                      fontSize: 17,
+                      fontSize: 12,
                       fontWeight: FontWeight.w900,
                       fontStyle: FontStyle.normal,
                       color: Color.fromRGBO(62, 71, 208, 1.0),
                     ),
                   ),
                   SizedBox(
-                    height: 15,
-                    width: 15,
-                  ),
-                  SizedBox(
-                    height: 15,
+                    height: 20,
                     width: 15,
                   ),
                   Container(
@@ -259,7 +435,7 @@ class _HomePageState extends State<HomePage> {
                         BoxShadow(
                           offset: Offset(0, 3),
                           blurRadius: 10,
-                          color: Color.fromRGBO(62, 71, 208, 1.0),
+                          color: Colors.black,
                         ),
                       ],
                     ),
@@ -267,10 +443,10 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "       Contatos de emergência ",
+                          "      Contatos de emergência ",
                           style: GoogleFonts.breeSerif(
                             textStyle: Theme.of(context).textTheme.headline4,
-                            fontSize: 23,
+                            fontSize: 22,
                             fontWeight: FontWeight.w900,
                             fontStyle: FontStyle.normal,
                             color: Color.fromRGBO(63, 71, 206, 1.0),
@@ -280,7 +456,7 @@ class _HomePageState extends State<HomePage> {
                             "     Adicione alguém para enviar pedidos de socorro.",
                             style: GoogleFonts.breeSerif(
                               textStyle: Theme.of(context).textTheme.headline4,
-                              fontSize: 13,
+                              fontSize: 12,
                               fontWeight: FontWeight.w900,
                               fontStyle: FontStyle.normal,
                               color: Color.fromRGBO(63, 71, 206, 1.0),
@@ -292,6 +468,11 @@ class _HomePageState extends State<HomePage> {
                         GestureDetector(
                           onTap: () {
                             print("botao adicionar");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => VerContatos()),
+                            );
                           },
                           child: Center(
                             child: Container(
@@ -310,7 +491,7 @@ class _HomePageState extends State<HomePage> {
                                   BoxShadow(
                                     offset: Offset(0, 3),
                                     blurRadius: 10,
-                                    color: Color.fromRGBO(62, 71, 208, 1.0),
+                                    color: Colors.black,
                                   ),
                                 ],
                               ),

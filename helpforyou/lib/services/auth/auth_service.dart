@@ -48,12 +48,29 @@ class AuthService {
     }
   }
 
-  static Future<bool> login(String email, String password) async {
+  static Future<bool> login(
+    BuildContext context,
+    String email,
+    String password,
+  ) async {
     final auth = FirebaseAuth.instance;
 
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
-      return true;
+      final userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      final user = userCredential.user;
+
+      if (user != null) {
+        final response = await DatabaseService.getUserData(user.uid);
+
+        if (response.status == ResponseStatus.SUCCESS) {
+          Provider.of<AuthState>(context, listen: false)
+              .setUser(response.object!);
+        }
+        return true;
+      }
+      return false;
     } catch (e) {
       return false;
     }
