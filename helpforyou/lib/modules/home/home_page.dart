@@ -28,6 +28,31 @@ class _HomePageState extends State<HomePage> {
             },
           );
   }
+  // launchApp(String url, BuildContext context) async {
+  //   await canLaunch(url)
+  //       ? await launch(url)
+  //       : showDialog(
+  //           context: context,
+  //           builder: (BuildContext context) {
+  //             return AlertDialog(
+  //               title: Text('Alerta!'),
+  //               content: Text('Não foi possivel acessar seus contatos.'),
+  //             );
+  //           },
+  //         );
+  // }
+
+  Future<void> _makePhoneCall(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Não foi possível acessar seus contatos."),
+        ),
+      );
+    }
+  }
   // Future<void> _makePhoneCall(String url) async {
   //   if (await canLaunch(url)) {
   //     await launch(url);
