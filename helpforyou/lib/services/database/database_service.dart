@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:helpforyou/services/auth/auth_service.dart';
 import 'package:helpforyou/shared/models/audio_model.dart';
 import 'package:helpforyou/shared/models/chat_model.dart';
+import 'package:helpforyou/shared/models/post_model.dart';
 import 'package:helpforyou/shared/models/psychologist_model.dart';
 import 'package:helpforyou/shared/models/user_model.dart';
 import 'package:helpforyou/shared/responses/default_response.dart';
@@ -89,6 +90,18 @@ class DatabaseService {
       );
     } else {
       return ResponseBuilder.failed(message: 'Falha ao acessar dadoss');
+    }
+  }
+
+  static Future<DefaultResponse<void>> savePost(PostModel postModel) async {
+    final firestore = FirebaseFirestore.instance;
+
+    try {
+      final response =
+          await firestore.collection("posts").add(postModel.toMap());
+      return ResponseBuilder.success(object: response);
+    } catch (e) {
+      return ResponseBuilder.failed(message: 'Falha ao tentar salvar post');
     }
   }
 }

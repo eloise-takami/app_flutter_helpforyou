@@ -150,7 +150,11 @@ class _SigninPageState extends State<SigninPage> {
                   onPressed: () async {
                     _email = emailController.text;
                     _password = passController.text;
-                    bool isValid = await AuthService.login(_email!, _password);
+                    bool isValid = await AuthService.login(
+                      context,
+                      _email!,
+                      _password,
+                    );
                     if (isValid) {
                       print("conectado");
                       Navigator.pushReplacementNamed(context, AppRoutes.app);
