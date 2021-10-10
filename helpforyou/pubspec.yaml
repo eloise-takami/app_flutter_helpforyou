@@ -35,6 +35,9 @@ dependencies:
   audioplayers: ^0.19.1
   flutter_audio_recorder2:
 
+  #imagem
+  image_picker:
+
   # mapas e localizacao
   flutter_map: ^0.13.1
   latlong2: ^0.8.0

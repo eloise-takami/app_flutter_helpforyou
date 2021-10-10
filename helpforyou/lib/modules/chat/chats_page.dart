@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helpforyou/services/database/database_service.dart';
@@ -56,12 +57,38 @@ class _ChatsPageState extends State<ChatsPage> {
               future: DatabaseService.psychologists(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Scaffold(
-                    body: Container(
+                  return Container(
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          'Ops, algo deu errado ao procurar psicólogos :(',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.breeSerif(
+                            textStyle: Theme.of(context).textTheme.headline4,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            fontStyle: FontStyle.normal,
+                            color: AppColors.roxo,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Image.asset(Imagem.erro),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
+                if (snapshot.hasData) {
+                  if (snapshot.data!.isEmpty) {
+                    return Container(
+                      width: double.infinity,
                       child: Column(
                         children: <Widget>[
                           Text(
-                            'Ops, algo deu errado ao procurar psicólogos :(',
+                            'Ops, não há psicólogos cadastrados :(',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.breeSerif(
                               textStyle: Theme.of(context).textTheme.headline4,
@@ -74,40 +101,9 @@ class _ChatsPageState extends State<ChatsPage> {
                           SizedBox(
                             width: 100,
                             height: 100,
-                            child: Image.asset(Imagem.erro),
+                            //child: Image.asset(Imagem.firebase_vazio),
                           ),
                         ],
-                      ),
-                    ),
-                  );
-                }
-
-                if (snapshot.hasData) {
-                  if (snapshot.data!.isEmpty) {
-                    return Scaffold(
-                      body: Container(
-                        width: double.infinity,
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              'Ops, não há psicólogos cadastrados :(',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.breeSerif(
-                                textStyle:
-                                    Theme.of(context).textTheme.headline4,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w900,
-                                fontStyle: FontStyle.normal,
-                                color: AppColors.roxo,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 100,
-                              height: 100,
-                              //child: Image.asset(Imagem.firebase_vazio),
-                            ),
-                          ],
-                        ),
                       ),
                     );
                   } else {
@@ -143,8 +139,17 @@ class ItemPsychologistWidget extends StatelessWidget {
 
   final PsychologistModel psychologist;
 
+  void getUrl() async {
+    final storage = FirebaseStorage.instance;
+    final url = await storage
+        .ref('psychologists/WwE5JiwJK2OrMay5OTMR/paula.jpg')
+        .getDownloadURL();
+    print(url);
+  }
+
   @override
   Widget build(BuildContext context) {
+    getUrl();
     return ListTile(
       onTap: () {
         Navigator.of(context).push(
