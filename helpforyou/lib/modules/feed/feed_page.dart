@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/modules/feed/post/new_post_controller.dart';
 import 'package:helpforyou/shared/models/post_model.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
 import 'package:helpforyou/shared/themes/app_images.dart';
@@ -251,11 +252,89 @@ class _FeedPageState extends State<FeedPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(postModel.userName),
-              Text(postModel.categoria),
-              Text(postModel.content),
-              Text('Date: ${DateTimeFormat.dateAndTime(postModel.date)}'),
-              Text('Likes: ${postModel.likes}'),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 10,
+                    height: 70,
+                  ),
+                  CircleAvatar(radius: 25.0, child: Icon(Icons.person)),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    postModel.userName,
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.breeSerif(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.normal,
+                        color: AppColors.roxo),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    postModel.categoria,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.breeSerif(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.normal,
+                        color: Colors.grey),
+                  ),
+                  Text(
+                    postModel.content,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.breeSerif(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.normal,
+                        color: Colors.grey[700]),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    '${DateTimeFormat.dateAndTime(postModel.date)}',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.breeSerif(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.normal,
+                        color: Colors.grey),
+                  ),
+                  SizedBox(
+                    width: 100,
+                  ),
+                  Text(
+                    'Likes: ${postModel.likes}',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.breeSerif(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.normal,
+                        color: Colors.grey),
+                  ),
+                  SizedBox(
+                    width: 10,
+                    height: 50,
+                  ),
+                ],
+              ),
             ],
           ),
         ),

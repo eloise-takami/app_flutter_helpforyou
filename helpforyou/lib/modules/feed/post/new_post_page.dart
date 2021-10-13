@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:helpforyou/shared/themes/app_colors.dart';
@@ -14,14 +15,21 @@ class NewPostPage extends StatefulWidget {
 class _NewPostPageState extends State<NewPostPage> {
   final controller = NewPostController();
   bool isLoading = false;
+  bool swithState = false;
 
   void postar() async {
     if (controller.valueChoose == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-          new SnackBar(content: const Text('Escolha uma categoria')));
+        new SnackBar(
+          content: const Text('Escolha uma categoria'),
+        ),
+      );
     } else if (controller.content.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(new SnackBar(content: const Text('Qual seu relato?')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        new SnackBar(
+          content: const Text('Qual seu relato?'),
+        ),
+      );
     } else {
       setState(() {
         isLoading = true;
@@ -162,6 +170,22 @@ class _NewPostPageState extends State<NewPostPage> {
                       ],
                     ),
                   ),
+                ),
+                CupertinoSwitch(
+                  value: controller.anonimo = false,
+                  onChanged: (bool swithState) {
+                    setState(
+                      () {
+                        NewPostController().anonimo = true;
+
+                        if (controller.anonimo == true) {
+                          print(true);
+                        } else {
+                          print(false);
+                        }
+                      },
+                    );
+                  },
                 ),
               ],
             ),

@@ -3,7 +3,7 @@ import 'dart:convert';
 class PostModel {
   final String content;
   final String categoria;
-  final String userName;
+  late final String userName;
   final String userId;
   final int likes;
   final DateTime date;
