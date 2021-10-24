@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/modules/app/drawer/camuflado.dart';
 import 'package:helpforyou/modules/app/drawer/noticias.dart';
 import 'package:helpforyou/modules/app/drawer/quemsomos.dart';
 import 'package:helpforyou/modules/app/drawer/violencias.dart';
@@ -97,6 +98,10 @@ class _AppPageState extends State<AppPage> {
                 setState(() {
                   switchState = value;
                 });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Camuflado()),
+                );
               }),
           SizedBox(
             height: 235,
