@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:helpforyou/modules/app/app_page.dart';
+import 'package:helpforyou/modules/app/drawer/camuflado.dart';
 import 'package:helpforyou/modules/audio_record/audio_record_page.dart';
 import 'package:helpforyou/modules/signin/signin_page.dart';
 import 'package:helpforyou/modules/signup/signup_page.dart';
@@ -25,6 +26,7 @@ class AppWidget extends StatelessWidget {
         AppRoutes.signup: (context) => SignupPage(),
         AppRoutes.app: (context) => AppPage(),
         AppRoutes.audio_record: (context) => AudioRecordPage(),
+        AppRoutes.masked: (context) => Camuflado(),
       },
       color: Colors.white,
     );
