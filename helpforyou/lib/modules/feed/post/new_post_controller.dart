@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 class NewPostController {
   TextEditingController content = TextEditingController();
   String? valueChoose;
-  bool? anonimo = false;
   final categorias = <String>[
     "Violência sexual",
     "Violência patrimonial",
@@ -16,19 +15,6 @@ class NewPostController {
     "Violência moral",
     "Violência psicológica"
   ];
-
-  Future<bool> anonimo(BuildContext context) async {
-    if (NewPostController().anonimo == true) {
-      PostModel(
-              categoria: '',
-              content: '',
-              date: DateTime.now(),
-              likes: 0,
-              userId: '',
-              userName: '')
-          .userName = "Anonimo";
-    } else {}
-  }
 
   Future<bool> postar(BuildContext context) async {
     final user = Provider.of<AuthState>(context, listen: false).getUser;
