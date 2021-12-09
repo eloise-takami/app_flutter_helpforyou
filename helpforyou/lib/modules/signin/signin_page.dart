@@ -64,7 +64,7 @@ class _SigninPageState extends State<SigninPage> {
                 labelStyle: TextStyle(
                   color: Colors.black38,
                   fontWeight: FontWeight.w400,
-                  fontSize: 20,
+                  fontSize: 18,
                 ),
               ),
               style: TextStyle(
@@ -80,29 +80,35 @@ class _SigninPageState extends State<SigninPage> {
               keyboardType: TextInputType.text,
               obscureText: param,
               decoration: InputDecoration(
-                  border: InputBorder.none,
-                  icon: Icon(
-                    Icons.lock,
+                border: InputBorder.none,
+                icon: Icon(
+                  Icons.lock,
+                  color: Color.fromRGBO(63, 71, 206, 1.0),
+                ),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      i++;
+                      param = !param;
+                      if (i % 2 == 0) {
+                        iconsenha = Icons.visibility_off_sharp;
+                      } else {
+                        iconsenha = Icons.visibility;
+                      }
+                    });
+                  },
+                  child: Icon(
+                    iconsenha,
                     color: Color.fromRGBO(63, 71, 206, 1.0),
                   ),
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        i++;
-                        param = !param;
-                        if (i % 2 == 0) {
-                          iconsenha = Icons.visibility_off_sharp;
-                        } else {
-                          iconsenha = Icons.visibility;
-                        }
-                      });
-                    },
-                    child: Icon(
-                      iconsenha,
-                      color: Color.fromRGBO(63, 71, 206, 1.0),
-                    ),
-                  ),
-                  labelText: "Senha"),
+                ),
+                labelText: "Senha",
+                labelStyle: TextStyle(
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 18,
+                ),
+              ),
             ),
             //_montarTextField("Senha", true,Icon(Icons.lock, color: Color.fromRGBO(63, 71, 206, 1.0))),
 
@@ -144,7 +150,7 @@ class _SigninPageState extends State<SigninPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      _montarTextoBotao("                      Entrar"),
+                      _montarTextoBotao("                   Entrar"),
                     ],
                   ),
                   onPressed: () async {
@@ -160,6 +166,38 @@ class _SigninPageState extends State<SigninPage> {
                       Navigator.pushReplacementNamed(context, AppRoutes.app);
                     } else {
                       print('login problem');
+                      showDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (BuildContext ctx) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                              ),
+                              title: Icon(
+                                Icons.warning_amber_rounded,
+                                size: 80,
+                                color: AppColors.roxo,
+                              ),
+                              content: Text('Email e/ou Senha inválidos!'),
+                              actions: <Widget>[
+                                RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                  ),
+                                  color: AppColors.roxo,
+                                  child: Text("Ok",
+                                      style:
+                                          TextStyle(color: AppColors.branco)),
+                                  onPressed: () {
+                                    Navigator.of(ctx).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          });
                     }
                   },
                 ),
