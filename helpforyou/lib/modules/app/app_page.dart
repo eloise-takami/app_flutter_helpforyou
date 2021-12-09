@@ -82,7 +82,7 @@ class _AppPageState extends State<AppPage> {
           ),
           ListTile(
             subtitle: Text(
-              "Se você estiver em uma situação de violência, ative o modo camuflado como disfarce do app.",
+              "Se você estiver em uma situação de violência, ative o modo camuflado como disfarce do app. Para voltar dentro do app, clique no icone do play.",
               textAlign: TextAlign.center,
               style: GoogleFonts.breeSerif(
                 textStyle: Theme.of(context).textTheme.headline4,
@@ -104,7 +104,7 @@ class _AppPageState extends State<AppPage> {
                 );
               }),
           SizedBox(
-            height: 235,
+            height: 215,
           ),
           Padding(
             padding: EdgeInsets.all(8),
