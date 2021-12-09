@@ -19,10 +19,16 @@ class _NewPostPageState extends State<NewPostPage> {
   void postar() async {
     if (controller.valueChoose == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-          new SnackBar(content: const Text('Escolha uma categoria')));
+        new SnackBar(
+          content: const Text('Escolha uma categoria'),
+        ),
+      );
     } else if (controller.content.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(new SnackBar(content: const Text('Qual seu relato?')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        new SnackBar(
+          content: const Text('Qual seu relato?'),
+        ),
+      );
     } else {
       setState(() {
         isLoading = true;
