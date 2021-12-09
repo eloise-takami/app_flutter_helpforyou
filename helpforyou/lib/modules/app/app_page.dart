@@ -1,5 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:helpforyou/modules/app/drawer/camuflado.dart';
+import 'package:helpforyou/modules/app/drawer/noticias.dart';
+import 'package:helpforyou/modules/app/drawer/quemsomos.dart';
+import 'package:helpforyou/modules/app/drawer/violencias.dart';
 import 'package:helpforyou/modules/chat/chats_page.dart';
 import 'package:helpforyou/modules/feed/feed_page.dart';
 import 'package:helpforyou/modules/home/home_page.dart';
@@ -15,6 +21,7 @@ class AppPage extends StatefulWidget {
 }
 
 class _AppPageState extends State<AppPage> {
+  bool switchState = false;
   final _pages = <Widget>[
     FeedPage(),
     RegistrationDataPage(),
@@ -56,6 +63,162 @@ class _AppPageState extends State<AppPage> {
           child: _pages[_pageIndex],
         ),
       ),
+      drawer: Drawer(
+          child: ListView(
+        children: <Widget>[
+          DrawerHeader(
+            child: Text(
+              'Modo camuflado',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.breeSerif(
+                textStyle: Theme.of(context).textTheme.headline4,
+                fontSize: 43,
+                fontWeight: FontWeight.w900,
+                fontStyle: FontStyle.normal,
+                color: Colors.white,
+              ),
+            ),
+            decoration: BoxDecoration(color: AppColors.roxo),
+          ),
+          ListTile(
+            subtitle: Text(
+              "Se você estiver em uma situação de violência, ative o modo camuflado como disfarce do app. Para voltar dentro do app, clique no icone do play.",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.breeSerif(
+                textStyle: Theme.of(context).textTheme.headline4,
+                fontSize: 12,
+                fontWeight: FontWeight.w900,
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+          ),
+          CupertinoSwitch(
+              value: switchState,
+              onChanged: (bool value) {
+                setState(() {
+                  switchState = value;
+                });
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Camuflado()),
+                );
+              }),
+          SizedBox(
+            height: 215,
+          ),
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: Divider(
+              thickness: 1.5,
+            ),
+          ),
+          ListTile(
+            leading: Container(
+              child: Icon(Icons.lightbulb, color: AppColors.roxo),
+              height: 45,
+              width: 45,
+              decoration: BoxDecoration(
+                color: AppColors.roxo.withOpacity(0.09),
+                borderRadius: BorderRadius.circular(18),
+              ),
+            ),
+            title: Text(
+              'Tipos de violências',
+              textAlign: TextAlign.left,
+              style: GoogleFonts.breeSerif(
+                textStyle: Theme.of(context).textTheme.headline4,
+                fontSize: 13,
+                fontWeight: FontWeight.w900,
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              size: 20,
+              color: AppColors.roxo,
+            ),
+            onTap: () {
+              print("pagina violencia");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TiposdeViolenciasPage()),
+              );
+            },
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          ListTile(
+            leading: Container(
+              child:
+                  Icon(Icons.chrome_reader_mode_rounded, color: AppColors.roxo),
+              height: 45,
+              width: 45,
+              decoration: BoxDecoration(
+                color: AppColors.roxo.withOpacity(0.09),
+                borderRadius: BorderRadius.circular(18),
+              ),
+            ),
+            title: Text(
+              'Notícias',
+              textAlign: TextAlign.left,
+              style: GoogleFonts.breeSerif(
+                textStyle: Theme.of(context).textTheme.headline4,
+                fontSize: 13,
+                fontWeight: FontWeight.w900,
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              size: 20,
+              color: AppColors.roxo,
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Noticias()),
+              );
+            },
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          ListTile(
+            leading: Container(
+              child: Icon(Icons.person, color: AppColors.roxo),
+              height: 45,
+              width: 45,
+              decoration: BoxDecoration(
+                color: AppColors.roxo.withOpacity(0.09),
+                borderRadius: BorderRadius.circular(18),
+              ),
+            ),
+            title: Text(
+              'Quem somos',
+              textAlign: TextAlign.left,
+              style: GoogleFonts.breeSerif(
+                textStyle: Theme.of(context).textTheme.headline4,
+                fontSize: 13,
+                fontWeight: FontWeight.w900,
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              size: 20,
+              color: AppColors.roxo,
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PageQuemSomos()),
+              );
+            },
+          ),
+        ],
+      )),
     );
   }
 

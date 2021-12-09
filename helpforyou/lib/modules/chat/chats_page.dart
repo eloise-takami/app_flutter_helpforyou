@@ -173,16 +173,23 @@ class ItemPsychologistWidget extends StatelessWidget {
       // ),
       title: Text(
         psychologist.name,
-        style: TextStyle(
-          color: AppColors.roxo,
+        style: GoogleFonts.breeSerif(
+          textStyle: Theme.of(context).textTheme.headline4,
+          fontSize: 16,
+          fontWeight: FontWeight.w900,
+          fontStyle: FontStyle.normal,
+          color: Color.fromRGBO(63, 71, 206, 1.0),
         ),
       ),
       subtitle: //Row(
           //children: <Widget>[
           Text(
         'last menssage',
-        style: TextStyle(
-          color: AppColors.roxo,
+        style: GoogleFonts.breeSerif(
+          textStyle: Theme.of(context).textTheme.headline4,
+          fontSize: 14,
+          fontStyle: FontStyle.normal,
+          color: Color.fromRGBO(63, 71, 206, 1.0),
         ),
       ),
       //SizedBox(width: 25),

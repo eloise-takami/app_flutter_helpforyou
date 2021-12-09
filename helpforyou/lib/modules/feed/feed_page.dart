@@ -136,6 +136,50 @@ class _FeedPageState extends State<FeedPage> {
                       ),
                     ),
                   ),
+                  IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (BuildContext ctx) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                ),
+                                title: Icon(
+                                  Icons.info_outline,
+                                  size: 75,
+                                  color: AppColors.roxo,
+                                ),
+                                content: Text(
+                                  "Caso você não saiba o que significa alguma das violências, arraste seu dedo para o lado que tem um menu de opções, explicando-as.",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                actions: <Widget>[
+                                  RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(15)),
+                                    ),
+                                    color: AppColors.roxo,
+                                    child: Text(
+                                      "OK",
+                                      style: TextStyle(color: AppColors.branco),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(ctx).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      icon: Icon(
+                        Icons.info_outline,
+                        color: AppColors.roxo,
+                        size: 25,
+                      ))
                 ],
               ),
               SizedBox(
@@ -251,11 +295,105 @@ class _FeedPageState extends State<FeedPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(postModel.userName),
-              Text(postModel.categoria),
-              Text(postModel.content),
-              Text('Date: ${DateTimeFormat.dateAndTime(postModel.date)}'),
-              Text('Likes: ${postModel.likes}'),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 10,
+                    height: 70,
+                  ),
+                  CircleAvatar(radius: 25.0, child: Icon(Icons.person)),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    postModel.userName,
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.breeSerif(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.normal,
+                        color: AppColors.roxo),
+                  ),
+                ],
+              ),
+              Text(
+                postModel.categoria,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.breeSerif(
+                    textStyle: Theme.of(context).textTheme.headline4,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w900,
+                    fontStyle: FontStyle.normal,
+                    color: Colors.grey),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      postModel.content,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.breeSerif(
+                          textStyle: Theme.of(context).textTheme.headline4,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w900,
+                          fontStyle: FontStyle.normal,
+                          color: Colors.grey[700]),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    '${DateTimeFormat.dateAndTime(postModel.date)}',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.breeSerif(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.normal,
+                        color: Colors.grey),
+                  ),
+                  SizedBox(
+                    width: 130,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      //contador curtida
+                    },
+                    child: Icon(Icons.favorite_border_outlined,
+                        color: AppColors.roxo),
+                  ),
+                  Text(
+                    ' ${postModel.likes}',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.breeSerif(
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.normal,
+                        color: Colors.grey),
+                  ),
+                  SizedBox(
+                    width: 10,
+                    height: 50,
+                  ),
+                ],
+              ),
             ],
           ),
         ),

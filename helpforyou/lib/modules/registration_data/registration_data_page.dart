@@ -63,17 +63,8 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
               children: [
                 CircleAvatar(
                   radius: 65,
-                  backgroundColor: Color.fromRGBO(62, 71, 208, 1.0),
-                  child: Text(
-                    'A',
-                    style: GoogleFonts.breeSerif(
-                      textStyle: Theme.of(context).textTheme.headline4,
-                      fontSize: 50,
-                      fontWeight: FontWeight.w900,
-                      fontStyle: FontStyle.normal,
-                      color: Colors.white,
-                    ),
-                  ),
+                  backgroundColor: AppColors.roxo,
+                  child: Icon(Icons.person, color: AppColors.branco, size: 60,)
                 ),
               ],
             ),
@@ -180,7 +171,10 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                           decoration: new BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
                             //border: new Border.all( color:Color.fromRGBO(63,71,206,1.0), width:4),
-                            color: Colors.white,
+                            color: Colors.cyan[50],
+                            border: new Border.all(
+                                    color: Color.fromRGBO(63, 71, 206, 1.0),
+                                    width: 4),
                             boxShadow: [
                               BoxShadow(
                                 offset: Offset(0, 3),
@@ -193,14 +187,14 @@ class _RegistrationDataPageState extends State<RegistrationDataPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "  Para saber mais sobre os \n tipos de violências entre no \n                    nosso site",
+                                " Se tiver alguma dúvida \n entre em contato conosco \n 2021helpforyou@gmail.com",
                                 style: GoogleFonts.breeSerif(
                                   textStyle:
                                       Theme.of(context).textTheme.headline4,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.w900,
                                   fontStyle: FontStyle.normal,
-                                  color: Colors.black,
+                                  color: Color.fromRGBO(63, 71, 206, 1.0),
                                 ),
                               ),
                             ],
